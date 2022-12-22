@@ -1,0 +1,15 @@
+﻿{
+  "profiles": {
+    "V_Project.Server": {
+      "commandName": "Project",
+      "applicationUrl": "https://localhost:6001",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "UseInMemoryDatabase": "true",
+        "GenerateTsWithOpenApi": "false",
+        "UseSpa": "false"
+      },
+      "dotnetRunMessages": true
+    }
+  }
+}
