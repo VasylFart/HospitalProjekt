@@ -23,8 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\core\V-Project.Application\V-Project.Application.csproj" />
-    <ProjectReference Include="..\..\infrastructure\V-Project.Infrastructure\V-Project.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\V-Project.Infrastructure\V-Project.Infrastructure.csproj" />
     <ProjectReference Include="..\V-Project.OpenApiGenerator\V-Project.OpenApiGenerator.csproj" />
   </ItemGroup>
 

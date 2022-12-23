@@ -15,12 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\V-Project.Application\V-Project.Application.csproj" />
-    <ProjectReference Include="..\V-Project.Domain\V-Project.Domain.csproj" />
+    <Folder Include="Options\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Options\" />
+    <ProjectReference Include="..\..\core\V-Project.Application\V-Project.Application.csproj" />
+    <ProjectReference Include="..\..\core\V-Project.Domain\V-Project.Domain.csproj" />
   </ItemGroup>
 
 </Project>

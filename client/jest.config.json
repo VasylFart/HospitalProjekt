@@ -1,0 +1,17 @@
+{
+  "verbose": true,
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  },
+  "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect", "<rootDir>/tests/setup.ts"],
+  "testRegex": "(spec).(ts|tsx)$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "testEnvironment": "jsdom",
+  "preset": "ts-jest",
+  "moduleNameMapper": {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+      "<rootDir>/assetsTransformer.ts",
+    "\\.(css|less)$": "<rootDir>/assetsTransformer.ts"
+  },
+  "automock": false
+}
