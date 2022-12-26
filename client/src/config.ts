@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-export const appName = 'Template';
+export const appName = 'V-Project';
 
 export const baseApiUrl = '/api';
 
