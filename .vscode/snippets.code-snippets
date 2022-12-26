@@ -1,0 +1,85 @@
+{
+    // Place your snippets for javascript here. Each snippet is defined under a snippet name and has a prefix, body and
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+    // same ids are connected.
+    // Example:
+    // "Print to console": {
+    // 	"prefix": "log",
+    // 	"body": [
+    // 		"console.log('$1');",
+    // 		"$2"
+    // 	],
+    // 	"description": "Log output to console"
+    // }
+    "describe": {
+        "prefix": "descr",
+        "body": [
+            "describe('$1', function () {",
+            "\t$0",
+            "});"
+        ]
+    },
+    "it": {
+        "prefix": "it",
+        "body": [
+            "it('$1', function () {",
+            "\t$0",
+            "});"
+        ]
+    },
+    "beforeEach": {
+        "prefix": "be",
+        "body": [
+            "beforeEach(function () {",
+            "\t$0",
+            "});"
+        ]
+    },
+    "afterEach": {
+        "prefix": "ae",
+        "body": [
+            "afterEach(function () {",
+            "\t$0",
+            "});"
+        ]
+    },
+    "VariantModule": {
+        "prefix": [
+            "variant-module",
+            "vm"
+        ],
+        "body": [
+            "export const $1 = variantModule({",
+            "    $2",
+            "});",
+            "export type $1<T extends TypeNames<typeof $1> = undefined> = VariantOf<typeof $1, T>;",
+            ""
+        ],
+        "description": "Initialize a module for variants"
+    },
+    "VariantList": {
+        "prefix": [
+            "variant-list",
+            "vl"
+        ],
+        "body": [
+            "export const $1 = variantList([",
+            "    $2",
+            "]);",
+            "export type $1<T extends TypeNames<typeof $1> = undefined> = VariantOf<typeof $1, T>;",
+            ""
+        ],
+        "description": "Initialize a module for variants as a list"
+    },
+    "VariantTypeAnnotation": {
+        "prefix": [
+            "variant-type",
+            "vt"
+        ],
+        "body": [
+            "export type $1<T extends TypeNames<typeof $1> = undefined> = VariantOf<typeof $1, T>;",
+        ],
+        "description": "Type annotation for variants"
+    }
+}

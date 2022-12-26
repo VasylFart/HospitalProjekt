@@ -6,7 +6,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "UseInMemoryDatabase": "true",
-        "GenerateTsWithOpenApi": "false",
+        "GenerateTsWithOpenApi": "true",
         "UseSpa": "true"
       },
       "dotnetRunMessages": true

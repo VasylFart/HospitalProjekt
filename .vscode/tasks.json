@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start client",
+            "type": "npm",
+            "script": "start:client",
+            "presentation": {
+                "group": "services"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Start server",
+            "type": "npm",
+            "script": "start:server",
+            "presentation": {
+                "group": "services"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Start all",
+            "dependsOn": [
+                "Start client",
+                "Start server"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

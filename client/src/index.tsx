@@ -1,16 +1,11 @@
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
 
-import App from './App';
+import { createApp } from './ApplicationFactory';
+import { resolveAppConfig } from './config';
 
-import 'bootstrap/dist/css/bootstrap.css';
+const appConfig = resolveAppConfig();
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href') ?? '';
-const rootElement = document.getElementById('root');
-
-ReactDOM.render(
-  <BrowserRouter basename={baseUrl}>
-    <App />
-  </BrowserRouter>,
-  rootElement
-);
+createApp(appConfig, function (rootComponent) {
+  root.render(rootComponent);
+});

@@ -1,4 +1,4 @@
-namespace V_Project.Server
+namespace V_Project.Domain
 {
     public class WeatherForecast
     {

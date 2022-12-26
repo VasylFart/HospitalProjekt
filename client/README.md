@@ -1,1 +1,0 @@
-# Frontend for V-Project

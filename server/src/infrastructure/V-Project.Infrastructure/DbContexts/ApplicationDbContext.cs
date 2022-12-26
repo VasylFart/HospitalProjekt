@@ -2,6 +2,7 @@
 using EntityFramework.Exceptions.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using V_Project.Application;
+using V_Project.Domain;
 
 namespace V_Project.Infrastructure;
 
@@ -13,6 +14,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     }
 
     // The DbSet property will tell EF Core tha we have a table that needs to be created
+    public DbSet<WeatherForecast> WeatherForecasts => Set<WeatherForecast>();
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
