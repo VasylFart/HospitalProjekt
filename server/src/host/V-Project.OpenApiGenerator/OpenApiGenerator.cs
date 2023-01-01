@@ -10,19 +10,19 @@ namespace V_Project.OpenApiGenerator;
 
 public sealed class OpenApiGenerator : BackgroundService
 {
-    private readonly ILogger<OpenApiGenerator> _logger;
-    private readonly IServiceProvider _serviceProvider;
+    private readonly ILogger<OpenApiGenerator> logger;
+    private readonly IServiceProvider serviceProvider;
 
     public OpenApiGenerator(IServiceProvider serviceProvider)
     {
-        _serviceProvider = serviceProvider;
-        _logger = _serviceProvider.GetRequiredService<ILogger<OpenApiGenerator>>();
+        this.serviceProvider = serviceProvider;
+        this.logger = this.serviceProvider.GetRequiredService<ILogger<OpenApiGenerator>>();
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         var document =
-            await OpenApiDocument.FromUrlAsync("https://localhost:5001/swagger/v1/swagger.json", stoppingToken);
+            await OpenApiDocument.FromUrlAsync("https://localhost:6001/swagger/v1/swagger.json", stoppingToken);
 
         var settings = new TypeScriptClientGeneratorSettings
         {
@@ -45,11 +45,11 @@ public sealed class OpenApiGenerator : BackgroundService
         if (!string.IsNullOrWhiteSpace(directory) && !Directory.Exists(directory))
         {
             Directory.CreateDirectory(directory);
-            _logger.LogInformation("OpenApiGenerator: Created dictionary.");
+            logger.LogInformation("OpenApiGenerator: Created dictionary.");
         }
 
-        _logger.LogInformation("OpenApiGenerator: Generating typescript code.");
+        logger.LogInformation("OpenApiGenerator: Generating typescript code.");
         await File.WriteAllTextAsync(path, code, new UTF8Encoding(false), stoppingToken);
-        _logger.LogInformation("OpenApiGenerator: Generated typescript code.");
+        logger.LogInformation("OpenApiGenerator: Generated typescript code.");
     }
 }

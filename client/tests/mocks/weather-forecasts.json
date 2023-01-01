@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2022-12-24",
+    "temperatureC": 23,
+    "temperatureF": 73,
+    "summary": "Hot"
+  },
+  {
+    "date": "2022-12-25",
+    "temperatureC": -9,
+    "temperatureF": 16,
+    "summary": "Warm"
+  },
+  {
+    "date": "2022-12-26",
+    "temperatureC": 42,
+    "temperatureF": 107,
+    "summary": "Warm"
+  }
+]

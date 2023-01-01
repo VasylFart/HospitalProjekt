@@ -1,0 +1,10 @@
+{
+  "eslint.workingDirectories": [
+    { "mode": "auto" }
+  ],
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.tsdk": "client/node_modules/typescript/lib",
+  "jestRunIt.jestConfigPath": "client/jest.config.json",
+  "jestRunIt.jestPath": "client/node_modules/jest/bin/jest.js"
+}

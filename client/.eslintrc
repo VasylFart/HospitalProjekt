@@ -1,0 +1,63 @@
+{
+	"env": {
+		"browser": true, 														// Browser global variables
+		"es2021": true, 														// adds ES 2021 globals and sets ecmaVersion to 12
+		"jest": true, 															// Jest global variables
+		"node": true 																// Node.js global variables and Node.js scoping, CHECK: Do we need it?
+	},
+	"extends": [
+		"eslint:recommended", 											// Recommended rules from eslint
+		"plugin:react/recommended", 								// Recommended rules from eslint-plugin-react
+		"plugin:react-hooks/recommended", 					// Recommended rules from eslint-plugin-react-hooks
+		"plugin:@typescript-eslint/recommended", 		// Recommended rules from @typescript-eslint/eslint-plugin
+		"plugin:prettier/recommended" 							// Enables eslint-plugin-prettier and eslint-config-prettier to display prettier errors as ESLint errors
+	],
+	"parser": "@typescript-eslint/parser", 				// Specifies the ESLint parser
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true 															// Allows for the parsing of JSX, CHECK: Doesn't seem to do anything
+		},
+		"sourceType": "module" 											// Allows for the use of imports, CHECK: Doesn't seem to do anything
+	},
+	"plugins": [
+		"react",
+		"react-hooks",
+		"@typescript-eslint",
+		"prettier",
+		"simple-import-sort"
+	],
+	"rules": {
+		"@typescript-eslint/ban-types": 0,
+		"@typescript-eslint/explicit-module-boundary-types": 0,
+		"@typescript-eslint/no-empty-function": 0,
+		"@typescript-eslint/no-empty-interface": 0,
+		"@typescript-eslint/no-explicit-any": 0,
+		"@typescript-eslint/no-unused-vars": 0,
+		"eqeqeq": ["warn"],
+		"indent": "off",
+		"no-alert": 2,
+		"no-console": 0,
+		"no-duplicate-imports": 2,
+		"prettier/prettier": ["error", { "endOfLine": "auto" }],
+		"react/display-name": 0,
+		"react/jsx-sort-props": 2,
+		"react/no-danger": 1,
+		"react/prop-types": 0,
+		"react/react-in-jsx-scope": 0,
+		"react-hooks/rules-of-hooks": 2,
+		"react-hooks/exhaustive-deps": 0,
+		"no-unused-vars": ["error", { "varsIgnorePattern": "^_", "args": "none", "caughtErrorsIgnorePattern": "^_" }],
+		"simple-import-sort/imports": ["error", {
+			"groups": [
+				["^@?\\w"], // NPM Packages
+				["^(vui|web)(/.*|$)"], // Alias imports
+				["^\\."] // Anything that starts with a dot
+			]
+		}]
+	},
+	"settings": {
+		"react": {
+			"version": "detect" 											// eslint-plugin-react will automatically detect React version
+		}
+	}
+}
