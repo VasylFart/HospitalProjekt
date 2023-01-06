@@ -16,8 +16,6 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     // The DbSet property will tell EF Core tha we have a table that needs to be created
     public DbSet<WeatherForecast> WeatherForecasts => Set<WeatherForecast>();
 
-    public DbSet<People> People => Set<People>();
-
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
         var result = await base.SaveChangesAsync(cancellationToken);
