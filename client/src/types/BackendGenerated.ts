@@ -10,9 +10,557 @@
 
 
 
+export interface ControllerBase {
+    httpContext: HttpContext;
+    request: HttpRequest;
+    response: HttpResponse;
+    routeData: RouteData;
+    modelState: ModelStateDictionary;
+    controllerContext: ControllerContext;
+    metadataProvider: IModelMetadataProvider;
+    modelBinderFactory: IModelBinderFactory;
+    url: IUrlHelper;
+    objectValidator: IObjectModelValidator;
+    problemDetailsFactory: ProblemDetailsFactory;
+    user: ClaimsPrincipal;
+}
+
+export interface Controller extends ControllerBase {
+    viewData: ViewDataDictionary;
+    tempData: ITempDataDictionary;
+    viewBag: any;
+}
+
+export interface PeopleController extends Controller {
+}
+
+export interface ViewDataDictionary {
+    Model?: any | undefined;
+    ModelState: ModelStateDictionary;
+    ModelMetadata: ModelMetadata;
+    ModelExplorer: ModelExplorer;
+    TemplateInfo: TemplateInfo;
+    Item?: any | undefined;
+    Count: number;
+    IsReadOnly: boolean;
+    Keys: string[];
+    Values: any[];
+    Data: { [key: string]: any; };
+}
+
+export interface ModelStateDictionary {
+    Root: ModelStateEntry;
+    MaxAllowedErrors: number;
+    HasReachedMaxErrors: boolean;
+    ErrorCount: number;
+    Count: number;
+    Keys: Keys[];
+    Values: Values[];
+    IsValid: boolean;
+    ValidationState: ModelValidationState;
+    Item?: ModelStateEntry | undefined;
+    MaxValidationDepth?: number | undefined;
+    MaxStateDepth?: number | undefined;
+}
+
+export interface ModelStateEntry {
+    rawValue?: any | undefined;
+    attemptedValue?: string | undefined;
+    errors: ModelError[];
+    validationState: ModelValidationState;
+}
+
+export interface ModelError {
+    exception?: Exception | undefined;
+    errorMessage: string;
+}
+
+export interface Exception {
+    Message: string;
+    InnerException?: Exception | undefined;
+    Source?: string | undefined;
+    StackTrace?: string | undefined;
+}
+
+export enum ModelValidationState {
+    Unvalidated = 0,
+    Invalid = 1,
+    Valid = 2,
+    Skipped = 3,
+}
+
+export interface ModelMetadata {
+    containerType?: string | undefined;
+    containerMetadata?: ModelMetadata | undefined;
+    metadataKind: ModelMetadataKind;
+    modelType: string;
+    name?: string | undefined;
+    parameterName?: string | undefined;
+    propertyName?: string | undefined;
+    boundConstructor?: ModelMetadata | undefined;
+    boundConstructorParameters?: ModelMetadata[] | undefined;
+    propertyValidationFilter?: IPropertyValidationFilter | undefined;
+    hasValidators?: boolean | undefined;
+    elementType?: string | undefined;
+    isComplexType: boolean;
+    isNullableValueType: boolean;
+    isCollectionType: boolean;
+    isEnumerableType: boolean;
+    isReferenceOrNullableType: boolean;
+    underlyingOrModelType: string;
+    boundConstructorInvoker?: FuncOfObjectOfAndObject | undefined;
+}
+
+export enum ModelMetadataKind {
+    Type = 0,
+    Property = 1,
+    Parameter = 2,
+    Constructor = 3,
+}
+
+export interface IPropertyValidationFilter {
+}
+
+export interface Delegate {
+    _target: any;
+    _methodBase: any;
+    _methodPtr: IntPtr;
+    _methodPtrAux: IntPtr;
+    Target?: any | undefined;
+    Method: MethodInfo;
+}
+
+export interface MulticastDelegate extends Delegate {
+}
+
+export interface FuncOfObjectOfAndObject extends MulticastDelegate {
+}
+
+export interface IntPtr {
+}
+
+export interface MemberInfo {
+    module: Module;
+    customAttributes: CustomAttributeData[];
+    isCollectible: boolean;
+    metadataToken: number;
+}
+
+export interface MethodBase extends MemberInfo {
+    methodImplementationFlags: MethodImplAttributes;
+    callingConvention: CallingConventions;
+    isAbstract: boolean;
+    isConstructor: boolean;
+    isFinal: boolean;
+    isHideBySig: boolean;
+    isSpecialName: boolean;
+    isStatic: boolean;
+    isVirtual: boolean;
+    isAssembly: boolean;
+    isFamily: boolean;
+    isFamilyAndAssembly: boolean;
+    isFamilyOrAssembly: boolean;
+    isPrivate: boolean;
+    isPublic: boolean;
+    isConstructedGenericMethod: boolean;
+    isGenericMethod: boolean;
+    isGenericMethodDefinition: boolean;
+    containsGenericParameters: boolean;
+    isSecurityCritical: boolean;
+    isSecuritySafeCritical: boolean;
+    isSecurityTransparent: boolean;
+}
+
+export interface MethodInfo extends MethodBase {
+    memberType: MemberTypes;
+    returnParameter: ParameterInfo;
+    returnType: string;
+}
+
+export enum MemberTypes {
+    Constructor = 1,
+    Event = 2,
+    Field = 4,
+    Method = 8,
+    Property = 16,
+    TypeInfo = 32,
+    Custom = 64,
+    NestedType = 128,
+    All = 191,
+}
+
+export interface ParameterInfo {
+    attributes: ParameterAttributes;
+    member: MemberInfo;
+    name?: string | undefined;
+    parameterType: string;
+    position: number;
+    isIn: boolean;
+    isLcid: boolean;
+    isOptional: boolean;
+    isOut: boolean;
+    isRetval: boolean;
+    defaultValue?: any | undefined;
+    rawDefaultValue?: any | undefined;
+    hasDefaultValue: boolean;
+    customAttributes: CustomAttributeData[];
+    metadataToken: number;
+}
+
+export enum ParameterAttributes {
+    None = 0,
+    In = 1,
+    Out = 2,
+    Lcid = 4,
+    Retval = 8,
+    Optional = 16,
+    HasDefault = 4096,
+    HasFieldMarshal = 8192,
+    Reserved3 = 16384,
+    Reserved4 = 32768,
+    ReservedMask = 61440,
+}
+
+export interface Module {
+    Assembly: Assembly;
+    FullyQualifiedName: string;
+    Name: string;
+    MDStreamVersion: number;
+    ModuleVersionId: string;
+    ScopeName: string;
+    ModuleHandle: ModuleHandle;
+    CustomAttributes: CustomAttributeData[];
+    MetadataToken: number;
+}
+
+export interface Assembly {
+    DefinedTypes: string[];
+    ExportedTypes: string[];
+    CodeBase?: string | undefined;
+    EntryPoint?: MethodInfo | undefined;
+    FullName?: string | undefined;
+    ImageRuntimeVersion: string;
+    IsDynamic: boolean;
+    Location: string;
+    ReflectionOnly: boolean;
+    IsCollectible: boolean;
+    IsFullyTrusted: boolean;
+    CustomAttributes: CustomAttributeData[];
+    EscapedCodeBase: string;
+    ManifestModule: Module;
+    Modules: Module[];
+    GlobalAssemblyCache: boolean;
+    HostContext: number;
+    SecurityRuleSet: SecurityRuleSet;
+}
+
+export interface CustomAttributeData {
+    attributeType: string;
+    constructor: ConstructorInfo;
+    constructorArguments: CustomAttributeTypedArgument[];
+    namedArguments: CustomAttributeNamedArgument[];
+}
+
+export interface ConstructorInfo extends MethodBase {
+    memberType: MemberTypes;
+}
+
+export enum MethodImplAttributes {
+    IL = 0,
+    Managed = 0,
+    Native = 1,
+    OPTIL = 2,
+    Runtime = 3,
+    CodeTypeMask = 3,
+    Unmanaged = 4,
+    ManagedMask = 4,
+    NoInlining = 8,
+    ForwardRef = 16,
+    Synchronized = 32,
+    NoOptimization = 64,
+    PreserveSig = 128,
+    AggressiveInlining = 256,
+    AggressiveOptimization = 512,
+    InternalCall = 4096,
+    MaxMethodImplVal = 65535,
+}
+
+export enum CallingConventions {
+    Standard = 1,
+    VarArgs = 2,
+    Any = 3,
+    HasThis = 32,
+    ExplicitThis = 64,
+}
+
+export interface CustomAttributeTypedArgument {
+    argumentType: string;
+    value?: any | undefined;
+}
+
+export interface CustomAttributeNamedArgument {
+    memberInfo: MemberInfo;
+    typedValue: CustomAttributeTypedArgument;
+    memberName: string;
+    isField: boolean;
+}
+
+export enum SecurityRuleSet {
+    None = 0,
+    Level1 = 1,
+    Level2 = 2,
+}
+
+export interface ModuleHandle {
+    mdStreamVersion: number;
+}
+
+export interface ModelExplorer {
+    container?: ModelExplorer | undefined;
+    metadata?: ModelMetadata | undefined;
+    model?: any | undefined;
+    modelType?: string | undefined;
+    properties?: ModelExplorer[] | undefined;
+}
+
+export interface TemplateInfo {
+    formattedModelValue?: any | undefined;
+    htmlFieldPrefix?: string | undefined;
+    templateDepth: number;
+}
+
+export interface ITempDataDictionary {
+}
+
+export interface HttpContext {
+}
+
+export interface HttpRequest {
+    bodyReader: PipeReader;
+    routeValues: RouteValueDictionary;
+}
+
+export interface PipeReader {
+}
+
+export interface RouteValueDictionary {
+    _arrayStorage: KeyValuePairOfStringAndObject[];
+    _propertyStorage?: PropertyStorage | undefined;
+    Item?: any | undefined;
+    Comparer: IEqualityComparerOfString;
+    Count: number;
+    Keys: string[];
+    Values: any[];
+}
+
+export interface KeyValuePairOfStringAndObject {
+    key: string;
+    value: any;
+}
+
+export interface PropertyStorage {
+    value: any;
+    properties: PropertyHelper[];
+}
+
+export interface PropertyHelper {
+    property: PropertyInfo;
+    name: string;
+    valueGetter: FuncOfObjectAndObject;
+    valueSetter: ActionOfObjectAndObject;
+}
+
+export interface PropertyInfo extends MemberInfo {
+    memberType: MemberTypes;
+    isSpecialName: boolean;
+    getMethod?: MethodInfo | undefined;
+    setMethod?: MethodInfo | undefined;
+}
+
+export interface FuncOfObjectAndObject extends MulticastDelegate {
+}
+
+export interface ActionOfObjectAndObject extends MulticastDelegate {
+}
+
+export interface IEqualityComparerOfString {
+}
+
+export interface HttpResponse {
+    bodyWriter: PipeWriter;
+}
+
+export interface PipeWriter {
+    canGetUnflushedBytes: boolean;
+    unflushedBytes: number;
+}
+
+export interface RouteData {
+    dataTokens: RouteValueDictionary;
+    routers: IRouter[];
+    values: RouteValueDictionary;
+}
+
+export interface IRouter {
+}
+
+export interface ActionContext {
+    actionDescriptor: ActionDescriptor;
+    httpContext: HttpContext;
+    modelState: ModelStateDictionary;
+    routeData: RouteData;
+}
+
+export interface ControllerContext extends ActionContext {
+    actionDescriptor: ControllerActionDescriptor;
+    valueProviderFactories: IValueProviderFactory[];
+}
+
+export interface ActionDescriptor {
+    id: string;
+    routeValues: { [key: string]: string; };
+    attributeRouteInfo?: AttributeRouteInfo | undefined;
+    actionConstraints?: IActionConstraintMetadata[] | undefined;
+    endpointMetadata: any[];
+    parameters: ParameterDescriptor[];
+    boundProperties: ParameterDescriptor[];
+    filterDescriptors: FilterDescriptor[];
+    displayName?: string | undefined;
+    properties: { [key: string]: any; };
+}
+
+export interface ControllerActionDescriptor extends ActionDescriptor {
+    controllerName: string;
+    actionName: string;
+    methodInfo: MethodInfo;
+    controllerTypeInfo: string;
+    displayName?: string | undefined;
+}
+
+export interface AttributeRouteInfo {
+    template?: string | undefined;
+    order: number;
+    name?: string | undefined;
+    suppressLinkGeneration: boolean;
+    suppressPathMatching: boolean;
+}
+
+export interface IActionConstraintMetadata {
+}
+
+export interface ParameterDescriptor {
+    name: string;
+    parameterType: string;
+    bindingInfo?: BindingInfo | undefined;
+}
+
+export interface BindingInfo {
+    bindingSource?: BindingSource | undefined;
+    binderModelName?: string | undefined;
+    binderType?: string | undefined;
+    propertyFilterProvider?: IPropertyFilterProvider | undefined;
+    requestPredicate?: FuncOfActionContextAndBoolean | undefined;
+    emptyBodyBehavior: EmptyBodyBehavior;
+}
+
+export interface BindingSource {
+    displayName: string;
+    id: string;
+    isGreedy: boolean;
+    isFromRequest: boolean;
+}
+
+export interface IPropertyFilterProvider {
+    propertyFilter: FuncOfModelMetadataAndBoolean;
+}
+
+export interface FuncOfModelMetadataAndBoolean extends MulticastDelegate {
+}
+
+export interface FuncOfActionContextAndBoolean extends MulticastDelegate {
+}
+
+export enum EmptyBodyBehavior {
+    Default = 0,
+    Allow = 1,
+    Disallow = 2,
+}
+
+export interface FilterDescriptor {
+    filter: IFilterMetadata;
+    order: number;
+    scope: number;
+}
+
+export interface IFilterMetadata {
+}
+
+export interface IValueProviderFactory {
+}
+
+export interface IModelMetadataProvider {
+}
+
+export interface IModelBinderFactory {
+}
+
+export interface IUrlHelper {
+    actionContext: ActionContext;
+}
+
+export interface IObjectModelValidator {
+}
+
+export interface ProblemDetailsFactory {
+}
+
+export interface ClaimsPrincipal {
+    claims: Claim[];
+    identities: ClaimsIdentity[];
+    identity?: IIdentity | undefined;
+}
+
+export interface Claim {
+    issuer: string;
+    originalIssuer: string;
+    properties: { [key: string]: string; };
+    subject?: ClaimsIdentity | undefined;
+    type: string;
+    value: string;
+    valueType: string;
+}
+
+export interface ClaimsIdentity {
+    authenticationType?: string | undefined;
+    isAuthenticated: boolean;
+    actor?: ClaimsIdentity | undefined;
+    bootstrapContext?: any | undefined;
+    claims: Claim[];
+    label?: string | undefined;
+    name?: string | undefined;
+    nameClaimType: string;
+    roleClaimType: string;
+}
+
+export interface IIdentity {
+    name?: string | undefined;
+    authenticationType?: string | undefined;
+    isAuthenticated: boolean;
+}
+
 export interface WeatherForecastDto {
     date: Date;
     temperatureC: number;
     temperatureF: number;
     summary?: string | undefined;
+}
+
+export interface Keys {
+
+    [key: string]: any;
+}
+
+export interface Values {
+
+    [key: string]: any;
 }
