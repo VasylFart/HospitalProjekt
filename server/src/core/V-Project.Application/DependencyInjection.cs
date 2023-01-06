@@ -8,8 +8,6 @@ public static class DependencyInjection
     {
         services.AddScoped<IWeatherForecastService, WeatherForecastService>();
 
-        services.AddScoped<IPeopleService, PeopleService>();
-
         return services;
     }
 }
