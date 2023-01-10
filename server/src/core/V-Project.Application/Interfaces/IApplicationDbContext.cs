@@ -6,7 +6,7 @@ namespace V_Project.Application;
 public interface IApplicationDbContext : IDisposable
 {
     DbSet<WeatherForecast> WeatherForecasts { get; }
-    DbSet<People> People { get; }
+    DbSet<Person> Person { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
