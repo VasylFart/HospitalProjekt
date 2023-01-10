@@ -17,10 +17,10 @@ public class PeopleController : Controller
     }
 
     [HttpGet("people")]
-    public IEnumerable<PeopleController> GetPeople()
+    public IEnumerable<PeopleDto> GetPeople()
     {
         logger.LogInformation("People");
 
-        return (IEnumerable<PeopleController>)service.GetPeople();
+        return service.GetPeople();
     }
 }
