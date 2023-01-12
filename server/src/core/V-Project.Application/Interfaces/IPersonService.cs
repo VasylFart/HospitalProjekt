@@ -2,5 +2,5 @@
 
 public interface IPersonService
 {
-    public IEnumerable<PersonDto> GetPerson();
+    public IEnumerable<PersonDto> GetPeople ();
 }

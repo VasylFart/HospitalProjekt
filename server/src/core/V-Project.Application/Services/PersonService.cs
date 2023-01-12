@@ -9,9 +9,9 @@ public class PersonService : IPersonService
         this.dbContext = dbContext;
     }
 
-    public IEnumerable<PersonDto> GetPerson()
+    public IEnumerable<PersonDto> GetPeople()
     {
-        var result = dbContext.Person
+        var result = dbContext.People
             .ToList();
 
         return result.Select(x => new PersonDto

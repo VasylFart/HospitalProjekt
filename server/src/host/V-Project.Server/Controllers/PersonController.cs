@@ -16,11 +16,11 @@ public class PersonController : Controller
         this.service = service;
     }
 
-    [HttpGet("person")]
-    public IEnumerable<PersonDto> GetPerson()
+    [HttpGet("people")]
+    public IEnumerable<PersonDto> GetPeople()
     {
-        logger.LogInformation("Person");
+        logger.LogInformation("Getting People");
 
-        return service.GetPerson();
+        return service.GetPeople();
     }
 }
