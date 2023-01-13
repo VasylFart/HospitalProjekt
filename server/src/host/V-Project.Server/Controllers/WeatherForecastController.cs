@@ -23,4 +23,6 @@ public class WeatherForecastController : ControllerBase
 
         return service.GetWeatherForecast();
     }
+
+    
 }
