@@ -36,4 +36,9 @@ public class PersonController : Controller
         return new PersonDto();
     }
 
+
+    [HttpDelete("people/{id}")]
+    public void Delete(int id)
+    {
+    }
 }
