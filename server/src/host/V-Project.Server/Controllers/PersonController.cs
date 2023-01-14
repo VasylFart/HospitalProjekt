@@ -23,4 +23,9 @@ public class PersonController : Controller
 
         return service.GetPeople();
     }
+
+    [HttpDelete("people/{id}")]
+    public void Delete(int id)
+    {
+    }
 }
