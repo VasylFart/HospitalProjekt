@@ -9,11 +9,13 @@ public class PersonController : Controller
 {
     private readonly ILogger<PersonController> logger;
     private readonly IPersonService service;
+    private IApplicationDbContext context;
 
-    public PersonController(ILogger<PersonController> logger, IPersonService service)
+    public PersonController(ILogger<PersonController> logger, IPersonService service, IApplicationDbContext context)
     {
         this.logger = logger;
         this.service = service;
+        this.context = context;
     }
 
     [HttpGet("people")]
@@ -27,7 +29,7 @@ public class PersonController : Controller
     [HttpPost("people")]
     public PersonDto? Post([FromBody] PersonDto personDto)
     {
-        if(personDto == null)
+        if (personDto == null)
         {
             HttpContext.Response.StatusCode = 400;
             return null;
@@ -39,7 +41,8 @@ public class PersonController : Controller
 
     [HttpDelete("people/{id}")]
     public void Delete(int id)
-    {
+    { 
+        context.Delete(id);
     }
 
     [HttpPut("people/{id}")]
