@@ -28,7 +28,6 @@ public class PersonController : Controller
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     [ProducesResponseType(500)]
-    [Produces("application/json")]
     public PersonDto? Post([FromBody] PersonDto personDto)
     {
         if(personDto == null)
