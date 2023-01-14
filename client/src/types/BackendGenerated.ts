@@ -10,7 +10,7 @@
 
 
 
-export interface PeopleDto {
+export interface PersonDto {
     id: number;
     name?: string | undefined;
     age: number;

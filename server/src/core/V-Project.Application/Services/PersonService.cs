@@ -1,20 +1,20 @@
 ﻿namespace V_Project.Application;
 
-public class PeopleService : IPeopleService
+public class PersonService : IPersonService
 {
     private readonly IApplicationDbContext dbContext;
 
-    public PeopleService(IApplicationDbContext dbContext)
+    public PersonService(IApplicationDbContext dbContext)
     {
         this.dbContext = dbContext;
     }
 
-    public IEnumerable<PeopleDto> GetPeople()
+    public IEnumerable<PersonDto> GetPeople()
     {
         var result = dbContext.People
             .ToList();
 
-        return result.Select(x => new PeopleDto
+        return result.Select(x => new PersonDto
         {
             Id = x.Id,
             Name = x.Name,

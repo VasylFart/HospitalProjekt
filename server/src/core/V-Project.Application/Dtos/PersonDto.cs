@@ -2,7 +2,7 @@
 
 namespace V_Project.Application;
 
-public class PeopleDto
+public class PersonDto
 {
     public int Id { get; set; }
     public string? Name { get; set; }
