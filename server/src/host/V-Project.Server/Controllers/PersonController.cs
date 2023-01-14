@@ -23,4 +23,9 @@ public class PersonController : Controller
 
         return service.GetPeople();
     }
+
+    [HttpPut("people/{id}")]
+    public void Put(int id, [FromBody] PersonDto personDto)
+    {
+    }
 }
