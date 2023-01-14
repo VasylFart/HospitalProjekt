@@ -24,6 +24,19 @@ public class PersonController : Controller
         return service.GetPeople();
     }
 
+    [HttpPost("people")]
+    public PersonDto? Post([FromBody] PersonDto personDto)
+    {
+        if(personDto == null)
+        {
+            HttpContext.Response.StatusCode = 400;
+            return null;
+        }
+
+        return new PersonDto();
+    }
+
+
     [HttpDelete("people/{id}")]
     public void Delete(int id)
     {
