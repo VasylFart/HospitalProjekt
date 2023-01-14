@@ -41,4 +41,9 @@ public class PersonController : Controller
     public void Delete(int id)
     {
     }
+
+    [HttpPut("people/{id}")]
+    public void Put(int id, [FromBody] PersonDto personDto)
+    {
+    }
 }
