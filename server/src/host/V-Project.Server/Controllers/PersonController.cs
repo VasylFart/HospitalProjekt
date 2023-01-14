@@ -25,9 +25,6 @@ public class PersonController : Controller
     }
 
     [HttpPost("people")]
-    [ProducesResponseType(201)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(500)]
     public PersonDto? Post([FromBody] PersonDto personDto)
     {
         if(personDto == null)
