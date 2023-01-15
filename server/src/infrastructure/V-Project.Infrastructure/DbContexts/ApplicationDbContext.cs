@@ -45,9 +45,4 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             .HaveConversion<DateOnlyConverter, DateOnlyComparer>()
             .HaveColumnType("date");
     }
-
-    public void Delete(int id)
-    {
-        base.Remove(id);
-    }
 }
