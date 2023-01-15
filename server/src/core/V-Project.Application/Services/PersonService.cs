@@ -25,7 +25,7 @@ public class PersonService : IPersonService
         });
     }
 
-    public void DeletePeople(Guid id)
+    public void DeletePerson(Guid id)
     {
         var person = dbContext.People.FirstOrDefault(p => p.Id == id);
 
