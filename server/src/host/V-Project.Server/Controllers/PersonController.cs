@@ -40,7 +40,7 @@ public class PersonController : Controller
     [HttpDelete("people/{id}")]
     public ActionResult Delete(Guid id)
     {
-        service.DeletePeople(id);
+        service.DeletePerson(id);
         return Ok();
     }
 
