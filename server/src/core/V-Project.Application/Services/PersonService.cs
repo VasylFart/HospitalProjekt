@@ -27,11 +27,14 @@ public class PersonService : IPersonService
     {
         var person = dbContext.People.FirstOrDefault(p => p.Id == id);
 
-        if (person != null)
+        if (person == null)
+        {
+            throw new ClientException($"Person with Id: {id} doesn't exist.");
+        }
+        else
         {
             dbContext.People.Remove(person);
             dbContext.SaveChangesAsync();
         }
     }
-
 }
