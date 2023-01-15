@@ -47,6 +47,6 @@ public class PersonController : Controller
     [HttpPut("people/{id}")]
     public void Put(Guid id, [FromBody] PersonDto personDto)
     {
-        service.UpdatePeople(id);
+        service.UpdatePeople(id, personDto);
     }
 }
