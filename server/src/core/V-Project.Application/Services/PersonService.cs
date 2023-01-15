@@ -35,4 +35,21 @@ public class PersonService : IPersonService
         dbContext.People.Remove(person);
         dbContext.SaveChangesAsync();
     }
+
+    public PersonDto UpdatePeople(Guid id, PersonDto personDto)
+    {
+        var person = dbContext.People.FirstOrDefault(p => p.Id == id);
+
+        if (person != null)
+        {
+            person.Name = personDto.Name;
+            person.Age = personDto.Age;
+            person.Country = personDto.Country;
+
+            dbContext.People.Update(person);
+            dbContext.SaveChangesAsync();
+        }
+
+        return personDto;
+    }
 }
