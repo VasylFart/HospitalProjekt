@@ -16,6 +16,7 @@ public class PersonService : IPersonService
 
         return result.Select(x => new PersonDto
         {
+            Id = x.Id,
             Name = x.Name,
             Age = x.Age,
             Country = x.Country
