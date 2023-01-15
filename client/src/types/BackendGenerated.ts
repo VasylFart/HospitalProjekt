@@ -11,7 +11,7 @@
 
 
 export interface PersonDto {
-    id: number;
+    id: string;
     name?: string | undefined;
     age: number;
     country?: string | undefined;
@@ -22,4 +22,11 @@ export interface WeatherForecastDto {
     temperatureC: number;
     temperatureF: number;
     summary?: string | undefined;
+}
+
+export interface FileResponse {
+    data: Blob;
+    status: number;
+    fileName?: string;
+    headers?: { [name: string]: any };
 }

@@ -9,6 +9,4 @@ public interface IApplicationDbContext : IDisposable
     DbSet<Person> People { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-    void Delete(int id);
-
 }

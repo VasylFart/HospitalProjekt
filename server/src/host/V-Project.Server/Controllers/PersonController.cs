@@ -9,13 +9,11 @@ public class PersonController : Controller
 {
     private readonly ILogger<PersonController> logger;
     private readonly IPersonService service;
-    private IApplicationDbContext context;
 
-    public PersonController(ILogger<PersonController> logger, IPersonService service, IApplicationDbContext context)
+    public PersonController(ILogger<PersonController> logger, IPersonService service)
     {
         this.logger = logger;
         this.service = service;
-        this.context = context;
     }
 
     [HttpGet("people")]
@@ -40,9 +38,10 @@ public class PersonController : Controller
 
 
     [HttpDelete("people/{id}")]
-    public void Delete(int id)
-    { 
-        context.Delete(id);
+    public ActionResult Delete(Guid id)
+    {
+        service.DeletePeople(id);
+        return Ok();
     }
 
     [HttpPut("people/{id}")]

@@ -16,11 +16,21 @@ public class PersonService : IPersonService
 
         return result.Select(x => new PersonDto
         {
-            Id = x.Id,
             Name = x.Name,
             Age = x.Age,
             Country = x.Country
         });
+    }
+
+    public void DeletePeople(Guid id)
+    {
+        var person = dbContext.People.FirstOrDefault(p => p.Id == id);
+
+        if (person != null)
+        {
+            dbContext.People.Remove(person);
+            dbContext.SaveChangesAsync();
+        }
     }
 
 }
