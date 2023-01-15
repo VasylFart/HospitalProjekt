@@ -31,10 +31,8 @@ public class PersonService : IPersonService
         {
             throw new ClientException($"Person with Id: {id} doesn't exist.");
         }
-        else
-        {
-            dbContext.People.Remove(person);
-            dbContext.SaveChangesAsync();
-        }
+        
+        dbContext.People.Remove(person);
+        dbContext.SaveChangesAsync();
     }
 }
