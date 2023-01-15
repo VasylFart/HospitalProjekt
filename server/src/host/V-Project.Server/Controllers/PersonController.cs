@@ -27,7 +27,7 @@ public class PersonController : Controller
     [HttpPost("people")]
     public PersonDto? Post([FromBody] PersonDto personDto)
     {
-        if(personDto == null)
+        if (personDto == null)
         {
             HttpContext.Response.StatusCode = 400;
             return null;
@@ -38,8 +38,10 @@ public class PersonController : Controller
 
 
     [HttpDelete("people/{id}")]
-    public void Delete(int id)
+    public ActionResult Delete(Guid id)
     {
+        service.DeletePeople(id);
+        return Ok();
     }
 
     [HttpPut("people/{id}")]

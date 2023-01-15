@@ -23,4 +23,16 @@ public class PersonService : IPersonService
         });
     }
 
+    public void DeletePeople(Guid id)
+    {
+        var person = dbContext.People.FirstOrDefault(p => p.Id == id);
+
+        if (person == null)
+        {
+            throw new ClientException($"Person with Id: {id} doesn't exist.");
+        }
+        
+        dbContext.People.Remove(person);
+        dbContext.SaveChangesAsync();
+    }
 }
