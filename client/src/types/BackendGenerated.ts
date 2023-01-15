@@ -17,6 +17,12 @@ export interface PersonDto {
     country?: string | undefined;
 }
 
+export interface PostPersonDto {
+    name?: string | undefined;
+    age: number;
+    country?: string | undefined;
+}
+
 export interface WeatherForecastDto {
     date: Date;
     temperatureC: number;

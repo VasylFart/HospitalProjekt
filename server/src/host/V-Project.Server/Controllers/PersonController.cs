@@ -25,7 +25,7 @@ public class PersonController : Controller
     }
 
     [HttpPost("people")]
-    public PersonDto? Post([FromBody] PersonDto personDto)
+    public PersonDto? Post([FromBody] PostPersonDto personDto)
     {
         if (personDto == null)
         {
@@ -45,8 +45,8 @@ public class PersonController : Controller
     }
 
     [HttpPut("people/{id}")]
-    public void Put(Guid id, [FromBody] PersonDto personDto)
+    public void Put(Guid id, [FromBody] PostPersonDto personDto)
     {
-        service.UpdatePeople(id, personDto);
+        service.UpdatePerson(id, personDto);
     }
 }

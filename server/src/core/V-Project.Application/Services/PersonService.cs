@@ -1,4 +1,6 @@
-﻿namespace V_Project.Application;
+﻿using System.Linq;
+
+namespace V_Project.Application;
 
 public class PersonService : IPersonService
 {
@@ -36,20 +38,34 @@ public class PersonService : IPersonService
         dbContext.SaveChangesAsync();
     }
 
-    public PersonDto UpdatePeople(Guid id, PersonDto personDto)
+    public PersonDto UpdatePerson(Guid id, PostPersonDto postPersonDto)
     {
         var person = dbContext.People.FirstOrDefault(p => p.Id == id);
 
         if (person != null)
         {
-            person.Name = personDto.Name;
-            person.Age = personDto.Age;
-            person.Country = personDto.Country;
+
+            person.Name = postPersonDto.Name;
+            person.Age = postPersonDto.Age;
+            person.Country = postPersonDto.Country;
 
             dbContext.People.Update(person);
             dbContext.SaveChangesAsync();
         }
 
-        return personDto;
+        var updatedPerson = dbContext.People.FirstOrDefault(p => p.Id == id);
+
+        if (updatedPerson == null)
+        {
+            throw new Exception();
+        }
+
+        return new PersonDto
+        {
+            Id = updatedPerson.Id,
+            Name = updatedPerson.Name,
+            Age = updatedPerson.Age,
+            Country = updatedPerson.Country
+        };
     }
 }
