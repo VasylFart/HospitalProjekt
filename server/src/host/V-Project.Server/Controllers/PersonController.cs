@@ -32,8 +32,13 @@ public class PersonController : Controller
             HttpContext.Response.StatusCode = 400;
             return null;
         }
+        return service.AddNewPerson(personDto);
+    }
 
-        return new PersonDto();
+    [HttpPut("people/{id}")]
+    public PersonDto Put([FromBody] PostPersonDto personDto, Guid id)
+    {
+        return service.UpdatePerson(personDto, id);
     }
 
     [HttpDelete("people/{id}")]
@@ -41,11 +46,5 @@ public class PersonController : Controller
     {
         service.DeletePerson(id);
         return Ok();
-    }
-
-    [HttpPut("people/{id}")]
-    public void Put(Guid id, [FromBody] PostPersonDto personDto)
-    {
-        service.UpdatePerson(id, personDto);
     }
 }

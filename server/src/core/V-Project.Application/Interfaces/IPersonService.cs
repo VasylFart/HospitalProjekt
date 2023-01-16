@@ -3,7 +3,8 @@
 public interface IPersonService
 {
     public IEnumerable<PersonDto> GetPeople ();
-    public void DeletePerson(Guid id);
-    public PersonDto UpdatePerson(Guid id, PostPersonDto personDto);
     public PersonDto AddNewPerson(PostPersonDto newPostPerson);
+    public PersonDto UpdatePerson(PostPersonDto personDto, Guid id);
+    public void DeletePerson(Guid id);
+
 }
