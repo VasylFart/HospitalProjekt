@@ -1,6 +1,6 @@
 ﻿namespace V_Project.Domain
 {
-    public class Person
+    public class Patient
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }

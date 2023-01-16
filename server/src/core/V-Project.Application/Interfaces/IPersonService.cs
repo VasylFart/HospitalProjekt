@@ -1,10 +1,10 @@
 ﻿namespace V_Project.Application;
 
-public interface IPersonService
+public interface IPatientService
 {
-    public IEnumerable<PersonDto> GetPeople ();
-    public PersonDto AddNewPerson(PostPersonDto newPostPerson);
-    public PersonDto UpdatePerson(PostPersonDto personDto, Guid id);
-    public void DeletePerson(Guid id);
+    public IEnumerable<PatientDto> GetPatients ();
+    public PatientDto AddNewPatient(PostPatientDto newPostPatient);
+    public PatientDto UpdatePatient(PostPatientDto patientDto, Guid id);
+    public void DeletePatient(Guid id);
 
 }

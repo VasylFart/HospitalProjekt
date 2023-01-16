@@ -5,46 +5,46 @@ namespace V_Project.Server;
 
 [ApiController]
 [Route("api")]
-public class PersonController : Controller
+public class PatientController : Controller
 {
-    private readonly ILogger<PersonController> logger;
-    private readonly IPersonService service;
+    private readonly ILogger<PatientController> logger;
+    private readonly IPatientService service;
 
-    public PersonController(ILogger<PersonController> logger, IPersonService service)
+    public PatientController(ILogger<PatientController> logger, IPatientService service)
     {
         this.logger = logger;
         this.service = service;
     }
 
-    [HttpGet("people")]
-    public IEnumerable<PersonDto> GetPeople()
+    [HttpGet("patients")]
+    public IEnumerable<PatientDto> GetPatients()
     {
-        logger.LogInformation("Getting People");
+        logger.LogInformation("Getting Patients");
 
-        return service.GetPeople();
+        return service.GetPatients();
     }
 
-    [HttpPost("people")]
-    public PersonDto? Post([FromBody] PostPersonDto personDto)
+    [HttpPost("patients")]
+    public PatientDto? Post([FromBody] PostPatientDto patientDto)
     {
-        if (personDto == null)
+        if (patientDto == null)
         {
             HttpContext.Response.StatusCode = 400;
             return null;
         }
-        return service.AddNewPerson(personDto);
+        return service.AddNewPatient(patientDto);
     }
 
-    [HttpPut("people/{id}")]
-    public PersonDto Put([FromBody] PostPersonDto personDto, Guid id)
+    [HttpPut("patients/{id}")]
+    public PatientDto Put([FromBody] PostPatientDto patientDto, Guid id)
     {
-        return service.UpdatePerson(personDto, id);
+        return service.UpdatePatient(patientDto, id);
     }
 
-    [HttpDelete("people/{id}")]
+    [HttpDelete("patients/{id}")]
     public ActionResult Delete(Guid id)
     {
-        service.DeletePerson(id);
+        service.DeletePatient(id);
         return Ok();
     }
 }

@@ -10,14 +10,14 @@
 
 
 
-export interface PersonDto {
+export interface PatientDto {
     id: string;
     name?: string | undefined;
     age: number;
     country?: string | undefined;
 }
 
-export interface PostPersonDto {
+export interface PostPatientDto {
     name?: string | undefined;
     age: number;
     country?: string | undefined;

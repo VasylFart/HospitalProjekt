@@ -2,7 +2,7 @@
 
 namespace V_Project.Application;
 
-public class PostPersonDto
+public class PostPatientDto
 {
     public string? Name { get; set; }
     public int Age { get; set; }

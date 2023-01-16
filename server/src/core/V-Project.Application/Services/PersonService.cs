@@ -2,21 +2,21 @@
 
 namespace V_Project.Application;
 
-public class PersonService : IPersonService
+public class PatientService : IPatientService
 {
     private readonly IApplicationDbContext dbContext;
 
-    public PersonService(IApplicationDbContext dbContext)
+    public PatientService(IApplicationDbContext dbContext)
     {
         this.dbContext = dbContext;
     }
 
-    public IEnumerable<PersonDto> GetPeople()
+    public IEnumerable<PatientDto> GetPatients()
     {
-        var result = dbContext.People
+        var result = dbContext.Patients
             .ToList();
 
-        return result.Select(x => new PersonDto
+        return result.Select(x => new PatientDto
         {
             Id = x.Id,
             Name = x.Name,
@@ -25,68 +25,68 @@ public class PersonService : IPersonService
         });
     }
 
-    public PersonDto AddNewPerson(PostPersonDto newPostPerson)
+    public PatientDto AddNewPatient(PostPatientDto newPostPatient)
     {
-        var newPerson = new Person()
+        var newPatient = new Patient()
         {
-            Name = newPostPerson.Name,
-            Age = newPostPerson.Age,
-            Country = newPostPerson.Country
+            Name = newPostPatient.Name,
+            Age = newPostPatient.Age,
+            Country = newPostPatient.Country
         };
 
-        dbContext.People.Add(newPerson);
+        dbContext.Patients.Add(newPatient);
         dbContext.SaveChangesAsync();
 
-        return new PersonDto
+        return new PatientDto
         {
-            Id = newPerson.Id,
-            Name = newPerson.Name,
-            Age = newPerson.Age,
-            Country = newPerson.Country
+            Id = newPatient.Id,
+            Name = newPatient.Name,
+            Age = newPatient.Age,
+            Country = newPatient.Country
         };
     }
 
-    public PersonDto UpdatePerson(PostPersonDto postPersonDto, Guid id)
+    public PatientDto UpdatePatient(PostPatientDto postPatientDto, Guid id)
     {
-        var person = dbContext.People.FirstOrDefault(p => p.Id == id);
+        var patient = dbContext.Patients.FirstOrDefault(p => p.Id == id);
 
-        if (person != null)
+        if (patient != null)
         {
 
-            person.Name = postPersonDto.Name;
-            person.Age = postPersonDto.Age;
-            person.Country = postPersonDto.Country;
+            patient.Name = postPatientDto.Name;
+            patient.Age = postPatientDto.Age;
+            patient.Country = postPatientDto.Country;
 
-            dbContext.People.Update(person);
+            dbContext.Patients.Update(patient);
             dbContext.SaveChangesAsync();
         }
 
-        var updatedPerson = dbContext.People.FirstOrDefault(p => p.Id == id);
+        var updatedPatient = dbContext.Patients.FirstOrDefault(p => p.Id == id);
 
-        if (updatedPerson == null)
+        if (updatedPatient == null)
         {
             throw new Exception();
         }
 
-        return new PersonDto
+        return new PatientDto
         {
-            Id = updatedPerson.Id,
-            Name = updatedPerson.Name,
-            Age = updatedPerson.Age,
-            Country = updatedPerson.Country
+            Id = updatedPatient.Id,
+            Name = updatedPatient.Name,
+            Age = updatedPatient.Age,
+            Country = updatedPatient.Country
         };
     }
 
-    public void DeletePerson(Guid id)
+    public void DeletePatient(Guid id)
     {
-        var person = dbContext.People.FirstOrDefault(p => p.Id == id);
+        var patient = dbContext.Patients.FirstOrDefault(p => p.Id == id);
 
-        if (person == null)
+        if (patient == null)
         {
-            throw new ClientException($"Person with Id: {id} doesn't exist.");
+            throw new ClientException($"Patient with Id: {id} doesn't exist.");
         }
 
-        dbContext.People.Remove(person);
+        dbContext.Patients.Remove(patient);
         dbContext.SaveChangesAsync();
     }
 }
