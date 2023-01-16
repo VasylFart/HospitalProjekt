@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using V_Project.Domain;
 
 namespace V_Project.Application;
 
@@ -66,6 +67,27 @@ public class PersonService : IPersonService
             Name = updatedPerson.Name,
             Age = updatedPerson.Age,
             Country = updatedPerson.Country
+        };
+    }
+
+    public PersonDto AddNewPerson(PostPersonDto newPostPerson)
+    {
+        var newPerson = new Person()
+        {
+            Name = newPostPerson.Name,
+            Age= newPostPerson.Age,
+            Country= newPostPerson.Country
+        };
+
+        dbContext.People.Add(newPerson);
+        dbContext.SaveChangesAsync();
+
+        return new PersonDto
+        {
+            Id = newPerson.Id,
+            Name = newPerson.Name,
+            Age = newPerson.Age,
+            Country = newPerson.Country
         };
     }
 }
