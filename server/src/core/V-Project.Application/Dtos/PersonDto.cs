@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace V_Project.Application;
+﻿namespace V_Project.Application;
 
 public class PersonDto
 {
