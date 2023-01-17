@@ -1,6 +1,6 @@
 ﻿namespace V_Project.Application;
 
-public class PersonDto
+public class PatientDto
 {
     public Guid Id { get; set; }
     public string? Name { get; set; }
