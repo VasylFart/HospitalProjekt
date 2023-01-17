@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using V_Project.Domain;
+﻿using V_Project.Domain;
 
 namespace V_Project.Application;
 
@@ -26,20 +25,28 @@ public class PersonService : IPersonService
         });
     }
 
-    public void DeletePerson(Guid id)
+    public PersonDto AddNewPerson(PostPersonDto newPostPerson)
     {
-        var person = dbContext.People.FirstOrDefault(p => p.Id == id);
-
-        if (person == null)
+        var newPerson = new Person()
         {
-            throw new ClientException($"Person with Id: {id} doesn't exist.");
-        }
-        
-        dbContext.People.Remove(person);
+            Name = newPostPerson.Name,
+            Age = newPostPerson.Age,
+            Country = newPostPerson.Country
+        };
+
+        dbContext.People.Add(newPerson);
         dbContext.SaveChangesAsync();
+
+        return new PersonDto
+        {
+            Id = newPerson.Id,
+            Name = newPerson.Name,
+            Age = newPerson.Age,
+            Country = newPerson.Country
+        };
     }
 
-    public PersonDto UpdatePerson(Guid id, PostPersonDto postPersonDto)
+    public PersonDto UpdatePerson(PostPersonDto postPersonDto, Guid id)
     {
         var person = dbContext.People.FirstOrDefault(p => p.Id == id);
 
@@ -70,24 +77,16 @@ public class PersonService : IPersonService
         };
     }
 
-    public PersonDto AddNewPerson(PostPersonDto newPostPerson)
+    public void DeletePerson(Guid id)
     {
-        var newPerson = new Person()
-        {
-            Name = newPostPerson.Name,
-            Age= newPostPerson.Age,
-            Country= newPostPerson.Country
-        };
+        var person = dbContext.People.FirstOrDefault(p => p.Id == id);
 
-        dbContext.People.Add(newPerson);
+        if (person == null)
+        {
+            throw new ClientException($"Person with Id: {id} doesn't exist.");
+        }
+
+        dbContext.People.Remove(person);
         dbContext.SaveChangesAsync();
-
-        return new PersonDto
-        {
-            Id = newPerson.Id,
-            Name = newPerson.Name,
-            Age = newPerson.Age,
-            Country = newPerson.Country
-        };
     }
 }
