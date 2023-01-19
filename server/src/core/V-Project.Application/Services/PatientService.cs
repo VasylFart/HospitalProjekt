@@ -21,7 +21,11 @@ public class PatientService : IPatientService
             Id = x.Id,
             Name = x.Name,
             Age = x.Age,
-            Country = x.Country
+            DateOfBirth = x.DateOfBirth,
+            Pesel = x.Pesel,
+            Citi = x.Citi,
+            Kontakt = x.Kontakt,
+            MobilePhone = x.MobilePhone
         });
     }
 
@@ -31,7 +35,11 @@ public class PatientService : IPatientService
         {
             Name = newPostPatient.Name,
             Age = newPostPatient.Age,
-            Country = newPostPatient.Country
+            DateOfBirth= newPostPatient.DateOfBirth,
+            Pesel= newPostPatient.Pesel,
+            Citi = newPostPatient.Citi,
+            Kontakt = newPostPatient.Kontakt,
+            MobilePhone= newPostPatient.MobilePhone
         };
 
         dbContext.Patients.Add(newPatient);
@@ -42,7 +50,11 @@ public class PatientService : IPatientService
             Id = newPatient.Id,
             Name = newPatient.Name,
             Age = newPatient.Age,
-            Country = newPatient.Country
+            DateOfBirth = newPatient.DateOfBirth,
+            Pesel = newPatient.Pesel,
+            Citi = newPatient.Citi,
+            Kontakt = newPatient.Kontakt,
+            MobilePhone = newPatient.MobilePhone
         };
     }
 
@@ -55,7 +67,11 @@ public class PatientService : IPatientService
 
             patient.Name = postPatientDto.Name;
             patient.Age = postPatientDto.Age;
-            patient.Country = postPatientDto.Country;
+            patient.DateOfBirth = postPatientDto.DateOfBirth;
+            patient.Pesel = postPatientDto.Pesel;
+            patient.Citi = postPatientDto.Citi;
+            patient.Kontakt = postPatientDto.Kontakt;
+            patient.MobilePhone = postPatientDto.MobilePhone;
 
             dbContext.Patients.Update(patient);
             dbContext.SaveChangesAsync();
@@ -73,7 +89,11 @@ public class PatientService : IPatientService
             Id = updatedPatient.Id,
             Name = updatedPatient.Name,
             Age = updatedPatient.Age,
-            Country = updatedPatient.Country
+            DateOfBirth = updatedPatient.DateOfBirth,
+            Pesel = updatedPatient.Pesel,
+            Citi = updatedPatient.Citi,
+            Kontakt = updatedPatient.Kontakt,
+            MobilePhone = updatedPatient.MobilePhone
         };
     }
 

@@ -14,13 +14,21 @@ export interface PatientDto {
     id: string;
     name?: string | undefined;
     age: number;
-    country?: string | undefined;
+    dateOfBirth: Date;
+    pesel: string;
+    citi?: string | undefined;
+    kontakt: string;
+    mobilePhone: string;
 }
 
 export interface PostPatientDto {
     name?: string | undefined;
     age: number;
-    country?: string | undefined;
+    dateOfBirth: Date;
+    pesel: string;
+    citi?: string | undefined;
+    kontakt: string;
+    mobilePhone: string;
 }
 
 export interface WeatherForecastDto {

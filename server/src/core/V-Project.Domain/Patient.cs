@@ -1,10 +1,18 @@
-﻿namespace V_Project.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace V_Project.Domain
 {
     public class Patient
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }
         public int Age { get; set; }
-        public string? Country { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string Pesel { get; set; }
+        public string? Citi { get; set; }
+        public string Kontakt { get; set; }
+
+        [Phone]
+        public string MobilePhone { get; set; }
     }
 }
