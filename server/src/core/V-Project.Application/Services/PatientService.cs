@@ -20,11 +20,10 @@ public class PatientService : IPatientService
         {
             Id = x.Id,
             Name = x.Name,
-            Age = x.Age,
             DateOfBirth = x.DateOfBirth,
             Pesel = x.Pesel,
-            Citi = x.Citi,
-            Kontakt = x.Kontakt,
+            City = x.City,
+            Contact = x.Contact,
             MobilePhone = x.MobilePhone
         });
     }
@@ -34,12 +33,11 @@ public class PatientService : IPatientService
         var newPatient = new Patient()
         {
             Name = newPostPatient.Name,
-            Age = newPostPatient.Age,
-            DateOfBirth= newPostPatient.DateOfBirth,
-            Pesel= newPostPatient.Pesel,
-            Citi = newPostPatient.Citi,
-            Kontakt = newPostPatient.Kontakt,
-            MobilePhone= newPostPatient.MobilePhone
+            DateOfBirth = newPostPatient.DateOfBirth,
+            Pesel = newPostPatient.Pesel,
+            City = newPostPatient.City,
+            Contact = newPostPatient.Contact,
+            MobilePhone = newPostPatient.MobilePhone
         };
 
         dbContext.Patients.Add(newPatient);
@@ -49,11 +47,10 @@ public class PatientService : IPatientService
         {
             Id = newPatient.Id,
             Name = newPatient.Name,
-            Age = newPatient.Age,
             DateOfBirth = newPatient.DateOfBirth,
             Pesel = newPatient.Pesel,
-            Citi = newPatient.Citi,
-            Kontakt = newPatient.Kontakt,
+            City = newPatient.City,
+            Contact = newPatient.Contact,
             MobilePhone = newPatient.MobilePhone
         };
     }
@@ -66,11 +63,10 @@ public class PatientService : IPatientService
         {
 
             patient.Name = postPatientDto.Name;
-            patient.Age = postPatientDto.Age;
             patient.DateOfBirth = postPatientDto.DateOfBirth;
             patient.Pesel = postPatientDto.Pesel;
-            patient.Citi = postPatientDto.Citi;
-            patient.Kontakt = postPatientDto.Kontakt;
+            patient.City = postPatientDto.City;
+            patient.Contact = postPatientDto.Contact;
             patient.MobilePhone = postPatientDto.MobilePhone;
 
             dbContext.Patients.Update(patient);
@@ -88,11 +84,10 @@ public class PatientService : IPatientService
         {
             Id = updatedPatient.Id,
             Name = updatedPatient.Name,
-            Age = updatedPatient.Age,
             DateOfBirth = updatedPatient.DateOfBirth,
             Pesel = updatedPatient.Pesel,
-            Citi = updatedPatient.Citi,
-            Kontakt = updatedPatient.Kontakt,
+            City = updatedPatient.City,
+            Contact = updatedPatient.Contact,
             MobilePhone = updatedPatient.MobilePhone
         };
     }
