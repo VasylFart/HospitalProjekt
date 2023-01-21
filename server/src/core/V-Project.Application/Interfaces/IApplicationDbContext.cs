@@ -7,6 +7,7 @@ public interface IApplicationDbContext : IDisposable
 {
     DbSet<WeatherForecast> WeatherForecasts { get; }
     DbSet<Patient> Patients { get; }
+    DbSet<Center> Centers { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

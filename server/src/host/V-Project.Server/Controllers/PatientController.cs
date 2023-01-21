@@ -32,6 +32,7 @@ public class PatientController : Controller
             HttpContext.Response.StatusCode = 400;
             return null;
         }
+
         return service.AddNewPatient(patientDto);
     }
 
