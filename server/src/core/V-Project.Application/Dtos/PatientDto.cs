@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace V_Project.Application;
+﻿namespace V_Project.Application;
 
 public class PatientDto
 {
