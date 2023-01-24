@@ -12,15 +12,22 @@
 
 export interface PatientDto {
     id: string;
-    name?: string | undefined;
+    name: string;
     age: number;
-    country?: string | undefined;
+    dateOfBirth: Date;
+    pesel: string;
+    city?: string | undefined;
+    contact?: string | undefined;
+    mobilePhone?: string | undefined;
 }
 
 export interface PostPatientDto {
-    name?: string | undefined;
-    age: number;
-    country?: string | undefined;
+    name: string;
+    dateOfBirth: Date;
+    pesel: string;
+    city?: string | undefined;
+    contact?: string | undefined;
+    mobilePhone?: string | undefined;
 }
 
 export interface WeatherForecastDto {

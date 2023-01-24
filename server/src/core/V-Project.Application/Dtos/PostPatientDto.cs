@@ -1,10 +1,11 @@
-﻿using System.Text.Json.Serialization;
-
-namespace V_Project.Application;
+﻿namespace V_Project.Application;
 
 public class PostPatientDto
 {
-    public string? Name { get; set; }
-    public int Age { get; set; }
-    public string? Country { get; set; }
+    public string Name { get; set; }
+    public DateOnly DateOfBirth { get; set; }
+    public string Pesel { get; set; }
+    public string? City { get; set; }
+    public string? Contact { get; set; }
+    public string? MobilePhone { get; set; }
 }

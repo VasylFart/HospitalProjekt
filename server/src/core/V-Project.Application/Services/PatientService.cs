@@ -20,8 +20,11 @@ public class PatientService : IPatientService
         {
             Id = x.Id,
             Name = x.Name,
-            Age = x.Age,
-            Country = x.Country
+            DateOfBirth = x.DateOfBirth,
+            Pesel = x.Pesel,
+            City = x.City,
+            Contact = x.Contact,
+            MobilePhone = x.MobilePhone
         });
     }
 
@@ -30,8 +33,11 @@ public class PatientService : IPatientService
         var newPatient = new Patient()
         {
             Name = newPostPatient.Name,
-            Age = newPostPatient.Age,
-            Country = newPostPatient.Country
+            DateOfBirth = newPostPatient.DateOfBirth,
+            Pesel = newPostPatient.Pesel,
+            City = newPostPatient.City,
+            Contact = newPostPatient.Contact,
+            MobilePhone = newPostPatient.MobilePhone
         };
 
         dbContext.Patients.Add(newPatient);
@@ -41,8 +47,11 @@ public class PatientService : IPatientService
         {
             Id = newPatient.Id,
             Name = newPatient.Name,
-            Age = newPatient.Age,
-            Country = newPatient.Country
+            DateOfBirth = newPatient.DateOfBirth,
+            Pesel = newPatient.Pesel,
+            City = newPatient.City,
+            Contact = newPatient.Contact,
+            MobilePhone = newPatient.MobilePhone
         };
     }
 
@@ -54,8 +63,11 @@ public class PatientService : IPatientService
         {
 
             patient.Name = postPatientDto.Name;
-            patient.Age = postPatientDto.Age;
-            patient.Country = postPatientDto.Country;
+            patient.DateOfBirth = postPatientDto.DateOfBirth;
+            patient.Pesel = postPatientDto.Pesel;
+            patient.City = postPatientDto.City;
+            patient.Contact = postPatientDto.Contact;
+            patient.MobilePhone = postPatientDto.MobilePhone;
 
             dbContext.Patients.Update(patient);
             dbContext.SaveChangesAsync();
@@ -72,8 +84,11 @@ public class PatientService : IPatientService
         {
             Id = updatedPatient.Id,
             Name = updatedPatient.Name,
-            Age = updatedPatient.Age,
-            Country = updatedPatient.Country
+            DateOfBirth = updatedPatient.DateOfBirth,
+            Pesel = updatedPatient.Pesel,
+            City = updatedPatient.City,
+            Contact = updatedPatient.Contact,
+            MobilePhone = updatedPatient.MobilePhone
         };
     }
 
