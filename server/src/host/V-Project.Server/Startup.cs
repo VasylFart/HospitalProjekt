@@ -48,6 +48,11 @@ public class Startup
         services.AddOpenApiGen(GenerateTsWithOpenApi);
 
         services.AddResponseCaching();
+
+        services.AddControllers().AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.Converters.Add(new Application.DateOnlyConverter());
+        });
     }
 
     public void Configure(IApplicationBuilder app)
