@@ -19,9 +19,4 @@ public static class DateOnlyExtensions
         }
         return DateTime.Today.Year - dateOfBirth.Year;
     }
-
-    internal static DateOnly CountAge()
-    {
-        throw new NotImplementedException();
-    }
 }

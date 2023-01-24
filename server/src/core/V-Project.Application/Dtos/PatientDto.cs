@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace V_Project.Application;
+﻿namespace V_Project.Application;
 
 public class PatientDto
 {
