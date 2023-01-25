@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace V_Project.Application;
+﻿namespace V_Project.Application;
 
 public class PatientDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
-    public int Age { get => DateTime.Now.Year - DateOfBirth.Year; }
+    public int Age => DateOfBirth.CountAge();
     public DateOnly DateOfBirth { get; set; }
     public string Pesel { get; set; }
     public string? City { get; set; }

@@ -23,7 +23,6 @@ export interface PatientDto {
 
 export interface PostPatientDto {
     name: string;
-    age: number;
     dateOfBirth: Date;
     pesel: string;
     city?: string | undefined;

@@ -8,4 +8,15 @@ public static class DateOnlyExtensions
     {
         return date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
     }
+
+    public static int CountAge(this DateOnly dateOfBirth)
+    {
+        if (DateTime.Today.Month < dateOfBirth.Month ||
+            DateTime.Today.Month == dateOfBirth.Month &&
+            DateTime.Today.Day < dateOfBirth.Day)
+        {
+            return DateTime.Today.Year - dateOfBirth.Year - 1;
+        }
+        return DateTime.Today.Year - dateOfBirth.Year;
+    }
 }
