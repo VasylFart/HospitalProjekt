@@ -33,18 +33,24 @@ public class PatientController : Controller
             return null;
         }
 
+        logger.LogInformation("Adding Patients");
+
         return service.AddNewPatient(patientDto);
     }
 
     [HttpPut("patients/{id}")]
     public PatientDto Put([FromBody] PostPatientDto patientDto, Guid id)
     {
+        logger.LogInformation("Updating Patients");
+
         return service.UpdatePatient(patientDto, id);
     }
 
     [HttpDelete("patients/{id}")]
     public ActionResult Delete(Guid id)
     {
+        logger.LogInformation("Deleting Patients");
+
         service.DeletePatient(id);
         return Ok();
     }

@@ -59,7 +59,7 @@ public class CenterService : ICenterService
 
         if (updatedCenter == null)
         {
-            throw new Exception();
+            throw new ClientException($"Center with Id: {id} doesn`t exist.");
         }
 
         return new CenterDto
