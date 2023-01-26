@@ -32,18 +32,25 @@ public class PatientController : Controller
             HttpContext.Response.StatusCode = 400;
             return null;
         }
+
+        logger.LogInformation("Adding Patient");
+
         return service.AddNewPatient(patientDto);
     }
 
     [HttpPut("patients/{id}")]
     public PatientDto Put([FromBody] PostPatientDto patientDto, Guid id)
     {
+        logger.LogInformation("Updating Patient");
+
         return service.UpdatePatient(patientDto, id);
     }
 
     [HttpDelete("patients/{id}")]
     public ActionResult Delete(Guid id)
     {
+        logger.LogInformation("Deleting Patient");
+
         service.DeletePatient(id);
         return Ok();
     }

@@ -18,6 +18,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     public DbSet<Patient> Patients => Set<Patient>();
 
+    public DbSet<Center> Centers => Set<Center>();
+
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
         var result = await base.SaveChangesAsync(cancellationToken);

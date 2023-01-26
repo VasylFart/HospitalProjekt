@@ -13,8 +13,7 @@ public class PatientService : IPatientService
 
     public IEnumerable<PatientDto> GetPatients()
     {
-        var result = dbContext.Patients
-            .ToList();
+        var result = dbContext.Patients.ToList();
 
         return result.Select(x => new PatientDto
         {
@@ -61,7 +60,6 @@ public class PatientService : IPatientService
 
         if (patient != null)
         {
-
             patient.Name = postPatientDto.Name;
             patient.DateOfBirth = postPatientDto.DateOfBirth;
             patient.Pesel = postPatientDto.Pesel;

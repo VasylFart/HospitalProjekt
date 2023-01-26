@@ -37,6 +37,17 @@ export interface WeatherForecastDto {
     summary?: string | undefined;
 }
 
+export interface CenterDto {
+    id: string;
+    name: string;
+    address: string;
+}
+
+export interface PostCenterDto {
+    name: string;
+    address: string;
+}
+
 export interface FileResponse {
     data: Blob;
     status: number;
