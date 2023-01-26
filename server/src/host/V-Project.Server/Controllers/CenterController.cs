@@ -19,7 +19,7 @@ public class CenterController : Controller
     [HttpGet("centers")]
     public IEnumerable<CenterDto> GetCenters()
     {
-        logger.LogInformation("Getting Center");
+        logger.LogInformation("Getting Centers");
 
         return service.GetCenters();
     }

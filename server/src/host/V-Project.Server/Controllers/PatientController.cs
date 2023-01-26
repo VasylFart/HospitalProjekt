@@ -19,7 +19,7 @@ public class PatientController : Controller
     [HttpGet("patients")]
     public IEnumerable<PatientDto> GetPatients()
     {
-        logger.LogInformation("Getting Patient");
+        logger.LogInformation("Getting Patients");
 
         return service.GetPatients();
     }
