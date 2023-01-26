@@ -46,6 +46,11 @@ public class CenterService : ICenterService
     {
         var center = dbContext.Centers.FirstOrDefault(c => c.Id == id);
 
+        if (center == null)
+        {
+            throw new ClientException($"Center with Id: {id} doesn`t exist.");
+        }
+
         if (center != null)
         {
             center.Name = centerDto.Name;
@@ -59,7 +64,7 @@ public class CenterService : ICenterService
 
         if (updatedCenter == null)
         {
-            throw new ClientException($"Center with Id: {id} doesn`t exist.");
+            throw new Exception();
         }
 
         return new CenterDto

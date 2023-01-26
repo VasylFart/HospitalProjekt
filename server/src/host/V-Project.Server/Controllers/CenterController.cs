@@ -19,7 +19,7 @@ public class CenterController : Controller
     [HttpGet("centers")]
     public IEnumerable<CenterDto> GetCenters()
     {
-        logger.LogInformation("Getting Centers");
+        logger.LogInformation("Getting Center");
 
         return service.GetCenters();
     }
@@ -33,7 +33,7 @@ public class CenterController : Controller
             return null;
         }
 
-        logger.LogInformation("Adding Centers");
+        logger.LogInformation("Adding Center");
 
         return service.AddNewCenter(centerDto);
     }
@@ -41,7 +41,7 @@ public class CenterController : Controller
     [HttpPut("centers/{id}")]
     public CenterDto Put([FromBody] PostCenterDto centerDto, Guid id)
     {
-        logger.LogInformation("Updating Centers");
+        logger.LogInformation("Updating Center");
 
         return service.UpdateCenter(centerDto, id);
     }
@@ -49,7 +49,7 @@ public class CenterController : Controller
     [HttpDelete("centers/{id}")]
     public ActionResult Delete(Guid id)
     {
-        logger.LogInformation("Deleting Centers");
+        logger.LogInformation("Deleting Center");
 
         service.DeleteCenter(id);
         return Ok();

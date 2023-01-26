@@ -19,7 +19,7 @@ public class PatientController : Controller
     [HttpGet("patients")]
     public IEnumerable<PatientDto> GetPatients()
     {
-        logger.LogInformation("Getting Patients");
+        logger.LogInformation("Getting Patient");
 
         return service.GetPatients();
     }
@@ -33,7 +33,7 @@ public class PatientController : Controller
             return null;
         }
 
-        logger.LogInformation("Adding Patients");
+        logger.LogInformation("Adding Patient");
 
         return service.AddNewPatient(patientDto);
     }
@@ -41,7 +41,7 @@ public class PatientController : Controller
     [HttpPut("patients/{id}")]
     public PatientDto Put([FromBody] PostPatientDto patientDto, Guid id)
     {
-        logger.LogInformation("Updating Patients");
+        logger.LogInformation("Updating Patient");
 
         return service.UpdatePatient(patientDto, id);
     }
@@ -49,7 +49,7 @@ public class PatientController : Controller
     [HttpDelete("patients/{id}")]
     public ActionResult Delete(Guid id)
     {
-        logger.LogInformation("Deleting Patients");
+        logger.LogInformation("Deleting Patient");
 
         service.DeletePatient(id);
         return Ok();
