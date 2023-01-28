@@ -21,4 +21,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\core\V-Project.Application\V-Project.Application.csproj" />
+  </ItemGroup>
+
 </Project>
