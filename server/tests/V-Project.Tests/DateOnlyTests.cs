@@ -6,7 +6,6 @@ namespace V_Project.Tests
 {
     public class DateOnlyTests
     {
-
         public static object[][] date =
         {
             new object[] {new DateOnly(1996, 08, 23), 26 },
