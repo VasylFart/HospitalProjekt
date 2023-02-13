@@ -1,4 +1,6 @@
-﻿namespace V_Project.Application;
+﻿using System.Text.Json.Serialization;
+
+namespace V_Project.Application;
 
 public class PatientDto
 {
@@ -7,6 +9,7 @@ public class PatientDto
     public string Name { get; set; }
 
     public int Age => DateOfBirth.CountAge();
+    [JsonConverter(typeof(DateOnlyConverter))]
 
     public DateOnly DateOfBirth { get; set; }
 

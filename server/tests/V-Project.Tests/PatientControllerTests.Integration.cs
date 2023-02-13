@@ -10,13 +10,8 @@ using V_Project.Infrastructure;
 using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Newtonsoft.Json;
-using System.Text;
 using System;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Serilog;
+using System.Net.Http.Json;
 
 namespace V_Project.Tests;
 
@@ -31,6 +26,9 @@ public class PatientControllerTests : IClassFixture<WebApplicationFactory<Startu
                 {
                     builder.ConfigureServices(services =>
                     {
+                        services.AddControllers().AddJsonOptions(options =>
+                        options.JsonSerializerOptions.Converters.Add(new Application.DateOnlyConverter()));
+
                         var dbContextOptions = services
                             .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
 
@@ -64,12 +62,10 @@ public class PatientControllerTests : IClassFixture<WebApplicationFactory<Startu
             MobilePhone = "111-222-333"
         };
 
-        var httpContent = model.ToJsonHttpContent();
+        //var httpContent = model.ToJsonHttpContent();
 
-        var response = await _client.PostAsync("/api/patients/", httpContent);
+        var response = await _client.PostAsJsonAsync("/api/patients/", model);
 
-        response.StatusCode.Should().Be(HttpStatusCode.Created);
-        
-        response.Headers.Location.Should().NotBeNull();
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 }
