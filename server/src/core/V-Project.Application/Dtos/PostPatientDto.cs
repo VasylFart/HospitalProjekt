@@ -5,6 +5,7 @@ namespace V_Project.Application;
 public class PostPatientDto
 {
     public string Name { get; set; }
+
     [JsonConverter(typeof(DateOnlyConverter))]
     public DateOnly DateOfBirth { get; set; }
 
