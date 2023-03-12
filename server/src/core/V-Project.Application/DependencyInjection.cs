@@ -6,8 +6,6 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddScoped<IWeatherForecastService, WeatherForecastService>();
-
         services.AddScoped<IPatientService, PatientService>();
 
         services.AddScoped<ICenterService, CenterService>();
