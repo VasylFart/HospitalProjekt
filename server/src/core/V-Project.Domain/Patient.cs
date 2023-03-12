@@ -4,15 +4,19 @@ public class Patient
 {
     public Guid Id { get; set; }
 
-    public string Name { get; set; }
+    public string FirstName { get; set; }
+
+    public string LastName { get; set; }
 
     public DateOnly DateOfBirth { get; set; }
 
     public string Pesel { get; set; }
 
-    public string? City { get; set; }
 
-    public string? Contact { get; set; }
+    public Address Address { get; set; }
 
-    public string? MobilePhone { get; set; }
+    public Contact? Contact { get; set; }
+
+    public Room Room { get; set; }
+
 }
