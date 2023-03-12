@@ -17,6 +17,13 @@ public class Patient
 
     public Contact? Contact { get; set; }
 
-    public Room Room { get; set; }
+    public List<Tag> Tags { get; set; }
 
+    public List<Room> Rooms { get; set; }
+
+    public Doctor Doctor { get; set; }
+
+    public Guid DoctorId { get; set; }
+
+    public List<Comment> Comments { get; set; }
 }
