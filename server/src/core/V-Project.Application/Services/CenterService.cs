@@ -19,7 +19,6 @@ public class CenterService : ICenterService
         {
             Id = c.Id,
             Name = c.Name,
-            Address = c.Address
         });
     }
 
@@ -28,7 +27,6 @@ public class CenterService : ICenterService
         var newCenter = new Center()
         {
             Name = newPostCenterDto.Name,
-            Address = newPostCenterDto.Address
         };
 
         dbContext.Centers.Add(newCenter);
@@ -38,11 +36,10 @@ public class CenterService : ICenterService
         {
             Id = newCenter.Id,
             Name = newCenter.Name,
-            Address = newCenter.Address
         };
     }
 
-    public CenterDto UpdateCenter(PostCenterDto centerDto, Guid id)
+    public CenterDto UpdateCenter(PostCenterDto centerDto, int id)
     {
         var center = dbContext.Centers.FirstOrDefault(c => c.Id == id);
 
@@ -54,7 +51,6 @@ public class CenterService : ICenterService
         if (center != null)
         {
             center.Name = centerDto.Name;
-            center.Address = centerDto.Address;
 
             dbContext.Centers.Update(center);
             dbContext.SaveChangesAsync();
@@ -70,12 +66,11 @@ public class CenterService : ICenterService
         return new CenterDto
         {
             Id = updatedCenter.Id,
-            Name = updatedCenter.Name,
-            Address = updatedCenter.Address
+            Name = updatedCenter.Name
         };
     }
 
-    public void DeleteCenter(Guid id)
+    public void DeleteCenter(int id)
     {
         var center = dbContext.Centers.FirstOrDefault(c => c.Id == id);
 

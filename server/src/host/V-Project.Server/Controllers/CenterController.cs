@@ -39,7 +39,7 @@ public class CenterController : Controller
     }
 
     [HttpPut("centers/{id}")]
-    public CenterDto Put([FromBody] PostCenterDto centerDto, Guid id)
+    public CenterDto Put([FromBody] PostCenterDto centerDto, int id)
     {
         logger.LogInformation("Updating Center");
 
@@ -47,7 +47,7 @@ public class CenterController : Controller
     }
 
     [HttpDelete("centers/{id}")]
-    public ActionResult Delete(Guid id)
+    public ActionResult Delete(int id)
     {
         logger.LogInformation("Deleting Center");
 

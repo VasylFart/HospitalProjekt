@@ -18,12 +18,9 @@ public class PatientService : IPatientService
         return result.Select(x => new PatientDto
         {
             Id = x.Id,
-            Name = x.Name,
+            FullName = x.FullName,
             DateOfBirth = x.DateOfBirth,
             Pesel = x.Pesel,
-            City = x.City,
-            Contact = x.Contact,
-            MobilePhone = x.MobilePhone
         });
     }
 
@@ -31,12 +28,9 @@ public class PatientService : IPatientService
     {
         var newPatient = new Patient()
         {
-            Name = newPostPatient.Name,
+            FullName = newPostPatient.FullName,
             DateOfBirth = newPostPatient.DateOfBirth,
             Pesel = newPostPatient.Pesel,
-            City = newPostPatient.City,
-            Contact = newPostPatient.Contact,
-            MobilePhone = newPostPatient.MobilePhone
         };
 
         dbContext.Patients.Add(newPatient);
@@ -45,12 +39,9 @@ public class PatientService : IPatientService
         return new PatientDto
         {
             Id = newPatient.Id,
-            Name = newPatient.Name,
+            FullName = newPatient.FullName,
             DateOfBirth = newPatient.DateOfBirth,
             Pesel = newPatient.Pesel,
-            City = newPatient.City,
-            Contact = newPatient.Contact,
-            MobilePhone = newPatient.MobilePhone
         };
     }
 
@@ -60,12 +51,9 @@ public class PatientService : IPatientService
 
         if (patient != null)
         {
-            patient.Name = postPatientDto.Name;
+            patient.FullName = postPatientDto.FullName;
             patient.DateOfBirth = postPatientDto.DateOfBirth;
             patient.Pesel = postPatientDto.Pesel;
-            patient.City = postPatientDto.City;
-            patient.Contact = postPatientDto.Contact;
-            patient.MobilePhone = postPatientDto.MobilePhone;
 
             dbContext.Patients.Update(patient);
             dbContext.SaveChangesAsync();
@@ -81,12 +69,9 @@ public class PatientService : IPatientService
         return new PatientDto
         {
             Id = updatedPatient.Id,
-            Name = updatedPatient.Name,
+            FullName = updatedPatient.FullName,
             DateOfBirth = updatedPatient.DateOfBirth,
             Pesel = updatedPatient.Pesel,
-            City = updatedPatient.City,
-            Contact = updatedPatient.Contact,
-            MobilePhone = updatedPatient.MobilePhone
         };
     }
 

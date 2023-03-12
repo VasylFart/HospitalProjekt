@@ -6,7 +6,7 @@ public interface ICenterService
 
     public CenterDto AddNewCenter(PostCenterDto newPostCenterDto);
 
-    public CenterDto UpdateCenter(PostCenterDto centerDto, Guid id);
+    public CenterDto UpdateCenter(PostCenterDto centerDto, int id);
 
-    public void DeleteCenter(Guid id);
+    public void DeleteCenter(int id);
 }

@@ -18,6 +18,20 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     public DbSet<Center> Centers => Set<Center>();
 
+    public DbSet<Address> Addresses  => Set<Address>();
+
+    public DbSet<Comment> Comments => Set<Comment>();
+
+    public DbSet<Contact> Contacts => Set<Contact>();
+
+    public DbSet<Doctor> Doctors => Set<Doctor>();
+
+    public DbSet<PatientRoom> PatientRooms => Set<PatientRoom>();
+        
+    public DbSet<Room> Rooms => Set<Room>();
+
+    public DbSet<Tag> Tags => Set<Tag>();
+
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
         var result = await base.SaveChangesAsync(cancellationToken);

@@ -4,14 +4,11 @@ public class Patient
 {
     public Guid Id { get; set; }
 
-    public string FirstName { get; set; }
-
-    public string LastName { get; set; }
+    public string FullName { get; set; }
 
     public DateOnly DateOfBirth { get; set; }
 
     public string Pesel { get; set; }
-
 
     public Address Address { get; set; }
 
@@ -26,4 +23,8 @@ public class Patient
     public Guid DoctorId { get; set; }
 
     public List<Comment> Comments { get; set; }
+
+    public Center Center { get; set; }
+
+    public int CenterId { get; set; }
 }

@@ -1,6 +1,8 @@
-﻿namespace V_Project.Domain;
+﻿using V_Project.Domain;
 
-public class Doctor
+namespace V_Project.Application;
+
+public class DoctorDto
 {
     public Guid Id { get; set; }
 
@@ -12,5 +14,5 @@ public class Doctor
 
     public Center Center { get; set; }
 
-    public int CenterId { get; set; }
+    public Guid CenterId { get; set; }
 }

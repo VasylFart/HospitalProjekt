@@ -12,40 +12,184 @@
 
 export interface PatientDto {
     id: string;
-    name: string;
+    fullName: string;
     age: number;
     dateOfBirth: Date;
     pesel: string;
-    city?: string | undefined;
-    contact?: string | undefined;
-    mobilePhone?: string | undefined;
 }
 
 export interface PostPatientDto {
-    name: string;
+    fullName: string;
     dateOfBirth: Date;
     pesel: string;
-    city?: string | undefined;
-    contact?: string | undefined;
-    mobilePhone?: string | undefined;
 }
 
-export interface WeatherForecastDto {
-    date: Date;
-    temperatureC: number;
-    temperatureF: number;
-    summary?: string | undefined;
+export interface AddressDto {
+    id: string;
+    country: string;
+    city?: string | undefined;
+    street: string;
+    numberHome: number;
+    patient: Patient;
+    patientId: string;
+}
+
+export interface Patient {
+    id: string;
+    fullName: string;
+    dateOfBirth: Date;
+    pesel: string;
+    address: Address;
+    contact?: Contact | undefined;
+    tags: Tag[];
+    rooms: Room[];
+    doctor: Doctor;
+    doctorId: string;
+    comments: Comment[];
+    center: Center;
+    centerId: number;
+}
+
+export interface Address {
+    id: string;
+    country: string;
+    city?: string | undefined;
+    street: string;
+    numberHome: number;
+    patient: Patient;
+    patientId: string;
+}
+
+export interface Contact {
+    id: number;
+    mobilePhone?: string | undefined;
+    email?: string | undefined;
+    patient: Patient;
+    patientId: string;
+}
+
+export interface Tag {
+    id: number;
+    value: string;
+    patient: Patient;
+    patientId: string;
+}
+
+export interface Room {
+    id: number;
+    number: number;
+    patients: Patient[];
+}
+
+export interface Doctor {
+    id: string;
+    fullName: string;
+    patients: Patient[];
+    comments: Comment[];
+    center: Center;
+    centerId: number;
+}
+
+export interface Comment {
+    id: number;
+    message: string;
+    createdDate: Date;
+    updatedDate?: Date | undefined;
+    doctor: Doctor;
+    doctorId: string;
+    patient: Patient;
+    patientId: string;
+}
+
+export interface Center {
+    id: number;
+    name: string;
+    patients: Patient[];
+    doctors: Doctor[];
+}
+
+export interface PostAddressDto {
+    country: string;
+    city?: string | undefined;
+    street: string;
+    numberHome: number;
+    patient: Patient;
+    patientId: string;
 }
 
 export interface CenterDto {
-    id: string;
+    id: number;
     name: string;
-    address: string;
+    address: Address;
 }
 
 export interface PostCenterDto {
     name: string;
-    address: string;
+    address: Address;
+}
+
+export interface CommentDto {
+    id: number;
+    message: string;
+    createdDate: Date;
+    updatedDate?: Date | undefined;
+    doctor: Doctor;
+    doctorId: string;
+    patient: Patient;
+    patientId: string;
+}
+
+export interface PostCommentDto {
+    message: string;
+    createdDate: Date;
+    updatedDate?: Date | undefined;
+    doctor: Doctor;
+    doctorId: string;
+    patient: Patient;
+    patientId: string;
+}
+
+export interface ContactDto {
+    id: number;
+    mobilePhone?: string | undefined;
+    email?: string | undefined;
+    patient: Patient;
+    patientId: string;
+}
+
+export interface PostContactDto {
+    mobilePhone?: string | undefined;
+    email?: string | undefined;
+    patient: Patient;
+    patientId: string;
+}
+
+export interface DoctorDto {
+    id: string;
+    fullName: string;
+    patients: Patient[];
+    comments: Comment[];
+    center: Center;
+    centerId: string;
+}
+
+export interface PostDoctorDto {
+    fullName: string;
+    patients: Patient[];
+    comments: Comment[];
+    center: Center;
+    centerId: string;
+}
+
+export interface RoomDto {
+    id: number;
+    number: number;
+    patients: Patient[];
+}
+
+export interface PostRoomDto {
+    number: number;
+    patients: Patient[];
 }
 
 export interface FileResponse {

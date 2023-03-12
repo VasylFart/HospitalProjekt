@@ -2,10 +2,12 @@
 {
     public class Center
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public Address Address { get; set; }
+        public List<Patient> Patients { get; set; }
+
+        public List<Doctor> Doctors { get; set; }
     }
 }
