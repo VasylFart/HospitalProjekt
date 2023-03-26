@@ -12,7 +12,5 @@ public class PostAddressDto
 
     public int NumberHome { get; set; }
 
-    public Patient Patient { get; set; }
-
     public Guid PatientId { get; set; }
 }

@@ -10,7 +10,5 @@ public class PostDoctorDto
 
     public List<Comment> Comments { get; set; }
 
-    public Center Center { get; set; }
-
     public Guid CenterId { get; set; }
 }

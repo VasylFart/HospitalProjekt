@@ -8,7 +8,5 @@ public class PostContactDto
 
     public string? Email { get; set; }
 
-    public Patient Patient { get; set; }
-
     public Guid PatientId { get; set; }
 }

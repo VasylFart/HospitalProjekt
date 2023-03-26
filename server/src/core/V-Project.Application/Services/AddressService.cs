@@ -19,8 +19,6 @@ public class AddressService : IAddressService
             City = newPostAddressDto.City,
             Street = newPostAddressDto.Street,
             NumberHome = newPostAddressDto.NumberHome
-
-
         };
 
         dbContext.Addresses.Add(newAddress);
