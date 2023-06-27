@@ -14,7 +14,7 @@ public class Patient
 
     public Contact? Contact { get; set; }
 
-    public List<Tag> Tags { get; set; }
+    public List<Status> Statuses { get; set; }
 
     public List<Room> Rooms { get; set; }
 
@@ -23,6 +23,10 @@ public class Patient
     public Guid DoctorId { get; set; }
 
     public List<Comment> Comments { get; set; }
+
+    public Statistic Statistic { get; set; }
+
+    public int StatisticId { get; set; }
 
     public Center Center { get; set; }
 

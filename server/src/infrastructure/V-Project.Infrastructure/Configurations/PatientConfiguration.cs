@@ -16,7 +16,7 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
                 .WithOne(c => c.Patient)
                  .HasForeignKey<Contact>(a => a.PatientId);
 
-        builder.HasMany(p => p.Tags)
+        builder.HasMany(p => p.Statuses)
                 .WithOne(t => t.Patient)
                  .HasForeignKey(t => t.PatientId);
 

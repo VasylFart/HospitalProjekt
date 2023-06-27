@@ -41,7 +41,7 @@ export interface Patient {
     pesel: string;
     address: Address;
     contact?: Contact | undefined;
-    tags: Tag[];
+    statuses: Status[];
     rooms: Room[];
     doctor: Doctor;
     doctorId: string;
@@ -68,7 +68,7 @@ export interface Contact {
     patientId: string;
 }
 
-export interface Tag {
+export interface Status {
     id: number;
     value: string;
     patient: Patient;
@@ -113,7 +113,6 @@ export interface PostAddressDto {
     city?: string | undefined;
     street: string;
     numberHome: number;
-    patient: Patient;
     patientId: string;
 }
 
@@ -125,7 +124,6 @@ export interface CenterDto {
 
 export interface PostCenterDto {
     name: string;
-    address: Address;
 }
 
 export interface CommentDto {
@@ -143,9 +141,7 @@ export interface PostCommentDto {
     message: string;
     createdDate: Date;
     updatedDate?: Date | undefined;
-    doctor: Doctor;
     doctorId: string;
-    patient: Patient;
     patientId: string;
 }
 
@@ -160,7 +156,6 @@ export interface ContactDto {
 export interface PostContactDto {
     mobilePhone?: string | undefined;
     email?: string | undefined;
-    patient: Patient;
     patientId: string;
 }
 
@@ -177,7 +172,6 @@ export interface PostDoctorDto {
     fullName: string;
     patients: Patient[];
     comments: Comment[];
-    center: Center;
     centerId: string;
 }
 

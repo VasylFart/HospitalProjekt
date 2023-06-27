@@ -1,6 +1,6 @@
 ﻿namespace V_Project.Domain;
 
-public class Tag
+public class Status
 {
     public int Id { get; set; }
 
@@ -10,4 +10,7 @@ public class Tag
 
     public Guid PatientId { get; set; }
 
+    public Statistic Statistic { get; set; }
+
+    public int StatisticId { get; set; }
 }

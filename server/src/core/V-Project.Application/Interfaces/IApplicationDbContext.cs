@@ -21,7 +21,7 @@ public interface IApplicationDbContext : IDisposable
 
     DbSet<Room> Rooms { get; }
 
-    DbSet<Tag> Tags { get; }
+    DbSet<Status> Statuses { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
