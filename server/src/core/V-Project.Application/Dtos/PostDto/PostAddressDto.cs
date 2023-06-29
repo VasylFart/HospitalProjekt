@@ -1,6 +1,4 @@
-﻿using V_Project.Domain;
-
-namespace V_Project.Application;
+﻿namespace V_Project.Application;
 
 public class PostAddressDto
 {
@@ -11,6 +9,4 @@ public class PostAddressDto
     public string Street { get; set; }
 
     public int NumberHome { get; set; }
-
-    public Guid PatientId { get; set; }
 }

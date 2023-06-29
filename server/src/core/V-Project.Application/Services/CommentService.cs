@@ -6,16 +6,17 @@ public class CommentService : ICommentService
 {
     private readonly IApplicationDbContext dbContext;
 
-    public CommentService(IApplicationDbContext dbContext)
-    {
-        this.dbContext = dbContext;
-    }
+        public CommentService(IApplicationDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
 
     public CommentDto AddNewComment(PostCommentDto newPostCommentDto)
     {
         var newComment = new Comment()
         {
             Message = newPostCommentDto.Message,
+            CreatedDate= newPostCommentDto.CreatedDate
         };
 
         dbContext.Comments.Add(newComment);
@@ -25,6 +26,7 @@ public class CommentService : ICommentService
         {
             Id = newComment.Id,
             Message = newComment.Message,
+            CreatedDate = newComment.CreatedDate
         };
     }
 
@@ -49,6 +51,7 @@ public class CommentService : ICommentService
         {
             Id = c.Id,
             Message = c.Message,
+            CreatedDate = c.CreatedDate
         });
     }
 
@@ -79,7 +82,8 @@ public class CommentService : ICommentService
         return new CommentDto
         {
             Id = updatedComment.Id,
-            Message = updatedComment.Message
+            Message = updatedComment.Message,
+            UpdatedDate = updatedComment.UpdatedDate
         };
     }
 }

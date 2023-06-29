@@ -8,11 +8,7 @@ public class DoctorDto
 
     public string FullName { get; set; }
 
-    public List<Patient> Patients { get; set; }
+    public List<PatientDto> Patients { get; set; }
 
-    public List<Comment> Comments { get; set; }
-
-    public Center Center { get; set; }
-
-    public Guid CenterId { get; set; }
+    public CenterDto Center { get; set; }
 }

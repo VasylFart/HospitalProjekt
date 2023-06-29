@@ -1,6 +1,4 @@
-﻿using V_Project.Domain;
-
-namespace V_Project.Application;
+﻿namespace V_Project.Application;
 
 public class AddressDto
 {
@@ -14,7 +12,5 @@ public class AddressDto
 
     public int NumberHome { get; set; }
 
-    public Patient Patient { get; set; }
-
-    public Guid PatientId { get; set; }
+    public PatientDto Patient { get; set; }
 }

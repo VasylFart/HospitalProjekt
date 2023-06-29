@@ -1,6 +1,4 @@
-﻿using V_Project.Domain;
-
-namespace V_Project.Application;
+﻿namespace V_Project.Application;
 
 public class CenterDto
 {
@@ -8,5 +6,7 @@ public class CenterDto
 
     public string Name { get; set; }
 
-    public Address Address { get; set; }
+    public List<PatientDto> Patients { get; set; }
+
+    public List<DoctorDto> Doctors { get; set; }
 }

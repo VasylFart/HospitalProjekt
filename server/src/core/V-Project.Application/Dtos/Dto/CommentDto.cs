@@ -1,6 +1,4 @@
-﻿using V_Project.Domain;
-
-namespace V_Project.Application;
+﻿namespace V_Project.Application;
 
 public class CommentDto
 {
@@ -12,11 +10,7 @@ public class CommentDto
 
     public DateTime? UpdatedDate { get; set; }
 
-    public Doctor Doctor { get; set; }
+    public DoctorDto Doctor { get; set; }
 
-    public Guid DoctorId { get; set; }
-
-    public Patient Patient { get; set; }
-
-    public Guid PatientId { get; set; }
+    public PatientDto Patient { get; set; }
 }

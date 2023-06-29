@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using V_Project.Application.Interfaces;
 
 namespace V_Project.Application;
 
@@ -19,6 +20,8 @@ public static class DependencyInjection
         services.AddScoped<IRoomService, RoomService>();
 
         services.AddScoped<IContactService, ContactService>();
+
+        services.AddScoped<IStatusService, StatusService>();
 
         return services;
     }
