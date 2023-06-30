@@ -18,7 +18,7 @@ export interface PatientDto {
     pesel: string;
     address: AddressDto;
     contact?: ContactDto | undefined;
-    statuses: StatusDto[];
+    statuses: DepartmentDto[];
     rooms: RoomDto[];
     doctor: DoctorDto;
     comments: CommentDto[];
@@ -41,7 +41,7 @@ export interface ContactDto {
     patient: PatientDto;
 }
 
-export interface StatusDto {
+export interface DepartmentDto {
     id: number;
     value: string;
     patient: PatientDto;
@@ -104,26 +104,16 @@ export interface PostContactDto {
     email?: string | undefined;
 }
 
+export interface PostDepartmentDto {
+    value: string;
+}
+
 export interface PostDoctorDto {
     fullName: string;
 }
 
 export interface PostRoomDto {
     number: number;
-}
-
-export interface PostStatusDto {
-    value: string;
-    patient: PatientDto;
-    statistic: StatisticDto;
-}
-
-export interface StatisticDto {
-    id: number;
-    doctors: DoctorDto[];
-    patients: PatientDto[];
-    statuss: StatusDto[];
-    rooms: RoomDto[];
 }
 
 export interface FileResponse {
