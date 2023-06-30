@@ -11,13 +11,21 @@ public class RoomConfiguration : IEntityTypeConfiguration<Room>
         builder.HasMany(r => r.Patients)
                 .WithMany(p => p.Rooms)
                  .UsingEntity<PatientRoom>(
-            r => r.HasOne(wit => wit.Patient)
+            r => r.HasOne(pr => pr.Patient)
                    .WithMany()
-                    .HasForeignKey(wit => wit.PatientId),
+                    .HasForeignKey(pr => pr.PatientId)
+                     .OnDelete(DeleteBehavior.Restrict),
 
-            p => p.HasOne(wit => wit.Room)
+            p => p.HasOne(pr => pr.Room)
                    .WithMany()
-                    .HasForeignKey(wit => wit.RoomId)
+                    .HasForeignKey(pr => pr.RoomId)
+                     .OnDelete(DeleteBehavior.Restrict),
+            pr =>
+            {
+                pr.HasKey(x => new { x.PatientId, x.RoomId });
+
+                pr.Property(x => x.PublicationDate).HasDefaultValueSql("getutcdate()");
+            }
             );
     }
 }

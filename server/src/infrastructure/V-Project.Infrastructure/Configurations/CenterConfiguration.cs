@@ -8,7 +8,7 @@ public class CenterConfiguration : IEntityTypeConfiguration<Center>
 {
     public void Configure(EntityTypeBuilder<Center> builder)
     {
-        builder.HasData(new Center() { Id = 1, Name = "Dom Pomocy" });
+        builder.HasData(new Center() { Id = 1, Name = "Szpital" });
 
         builder.HasMany(c => c.Patients)
                 .WithOne(p => p.Center)

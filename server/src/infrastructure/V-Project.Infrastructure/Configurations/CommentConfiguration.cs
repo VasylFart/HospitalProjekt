@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using V_Project.Domain;
 
-namespace V_Project.Infrastructure.Configurations
-{
+namespace V_Project.Infrastructure;
+
     public class CommentConfiguration : IEntityTypeConfiguration<Comment>
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
