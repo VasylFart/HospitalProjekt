@@ -12,10 +12,12 @@ public class CenterConfiguration : IEntityTypeConfiguration<Center>
 
         builder.HasMany(c => c.Patients)
                 .WithOne(p => p.Center)
-                 .HasForeignKey(p => p.CenterId);
-
+                 .HasForeignKey(p => p.CenterId)
+                  .OnDelete(DeleteBehavior.Restrict);
+        
         builder.HasMany(c => c.Doctors)
                 .WithOne(p => p.Center)
-                 .HasForeignKey(p => p.CenterId);
+                 .HasForeignKey(p => p.CenterId)
+                  .OnDelete(DeleteBehavior.Restrict);
     }
 }

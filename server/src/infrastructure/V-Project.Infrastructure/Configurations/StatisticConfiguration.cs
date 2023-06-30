@@ -10,18 +10,17 @@ public class StatisticConfiguration : IEntityTypeConfiguration<Statistic>
     {
         builder.HasMany(s => s.Doctors)
                 .WithOne(d => d.Statistic)
-                 .HasForeignKey(d => d.StatisticId);
-        
+                 .HasForeignKey(d => d.StatisticId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
         builder.HasMany(s => s.Patients)
                 .WithOne(p => p.Statistic)
-                 .HasForeignKey(p => p.StatisticId);
+                 .HasForeignKey(p => p.StatisticId)
+                  .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(s => s.Rooms)
                 .WithOne(r => r.Statistic)
-                 .HasForeignKey(r => r.StatisticId);
-
-        builder.HasMany(s => s.Statuss)
-                .WithOne(st => st.Statistic)
-                 .HasForeignKey(st => st.StatisticId);
+                 .HasForeignKey(r => r.StatisticId)
+                  .OnDelete(DeleteBehavior.Restrict);
     }
 }

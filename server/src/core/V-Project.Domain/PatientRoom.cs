@@ -2,6 +2,8 @@
 
 public class PatientRoom
 {
+    public DateTime PublicationDate { get; set; }
+
     public Patient Patient { get; set; }
 
     public Guid PatientId { get; set; }

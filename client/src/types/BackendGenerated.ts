@@ -16,12 +16,13 @@ export interface PatientDto {
     age: number;
     dateOfBirth: Date;
     pesel: string;
-}
-
-export interface PostPatientDto {
-    fullName: string;
-    dateOfBirth: Date;
-    pesel: string;
+    address: AddressDto;
+    contact?: ContactDto | undefined;
+    statuses: StatusDto[];
+    rooms: RoomDto[];
+    doctor: DoctorDto;
+    comments: CommentDto[];
+    center: CenterDto;
 }
 
 export interface AddressDto {
@@ -33,22 +34,37 @@ export interface AddressDto {
     patient: PatientDto;
 }
 
-export interface PostAddressDto {
-    country: string;
-    city?: string | undefined;
-    street: string;
-    numberHome: number;
-    patientId: string;
+export interface ContactDto {
+    id: number;
+    mobilePhone?: string | undefined;
+    email?: string | undefined;
+    patient: PatientDto;
+}
+
+export interface StatusDto {
+    id: number;
+    value: string;
+    patient: PatientDto;
+}
+
+export interface RoomDto {
+    id: number;
+    number: number;
+    patients: PatientDto[];
+}
+
+export interface DoctorDto {
+    id: string;
+    fullName: string;
+    patients: PatientDto[];
+    center: CenterDto;
 }
 
 export interface CenterDto {
     id: number;
     name: string;
-    address: AddressDto;
-}
-
-export interface PostCenterDto {
-    name: string;
+    patients: PatientDto[];
+    doctors: DoctorDto[];
 }
 
 export interface CommentDto {
@@ -60,115 +76,27 @@ export interface CommentDto {
     patient: PatientDto;
 }
 
-export interface DoctorDto {
-    id: string;
-    fullName: string;
-    patients: Patient[];
-    comments: Comment[];
-    center: CenterDto;
-}
-
-export interface Patient {
-    id: string;
+export interface PostPatientDto {
     fullName: string;
     dateOfBirth: Date;
     pesel: string;
-    address: Address;
-    contact?: Contact | undefined;
-    statuses: Status[];
-    rooms: Room[];
-    doctor: Doctor;
-    doctorId: string;
-    comments: Comment[];
-    statistic: Statistic;
-    statisticId: number;
-    center: Center;
-    centerId: number;
 }
 
-export interface Address {
-    id: string;
+export interface PostAddressDto {
     country: string;
     city?: string | undefined;
     street: string;
     numberHome: number;
-    patient: Patient;
-    patientId: string;
 }
 
-export interface Contact {
-    id: number;
-    mobilePhone?: string | undefined;
-    email?: string | undefined;
-    patient: Patient;
-    patientId: string;
-}
-
-export interface Status {
-    id: number;
-    value: string;
-    patient: Patient;
-    patientId: string;
-    statistic: Statistic;
-    statisticId: number;
-}
-
-export interface Statistic {
-    id: number;
-    doctors: Doctor[];
-    patients: Patient[];
-    statuss: Status[];
-    rooms: Room[];
-}
-
-export interface Doctor {
-    id: string;
-    fullName: string;
-    patients: Patient[];
-    comments: Comment[];
-    center: Center;
-    centerId: number;
-    statistic: Statistic;
-    statisticId: number;
-}
-
-export interface Comment {
-    id: number;
-    message: string;
-    createdDate: Date;
-    updatedDate?: Date | undefined;
-    doctor: Doctor;
-    doctorId: string;
-    patient: Patient;
-    patientId: string;
-}
-
-export interface Center {
-    id: number;
+export interface PostCenterDto {
     name: string;
-    patients: Patient[];
-    doctors: Doctor[];
-}
-
-export interface Room {
-    id: number;
-    number: number;
-    patients: Patient[];
-    statistic: Statistic;
-    statisticId: number;
 }
 
 export interface PostCommentDto {
     message: string;
     createdDate: Date;
     updatedDate?: Date | undefined;
-}
-
-export interface ContactDto {
-    id: number;
-    mobilePhone?: string | undefined;
-    email?: string | undefined;
-    patient: PatientDto;
 }
 
 export interface PostContactDto {
@@ -180,14 +108,22 @@ export interface PostDoctorDto {
     fullName: string;
 }
 
-export interface RoomDto {
-    id: number;
-    number: number;
-    patients: Patient[];
-}
-
 export interface PostRoomDto {
     number: number;
+}
+
+export interface PostStatusDto {
+    value: string;
+    patient: PatientDto;
+    statistic: StatisticDto;
+}
+
+export interface StatisticDto {
+    id: number;
+    doctors: DoctorDto[];
+    patients: PatientDto[];
+    statuss: StatusDto[];
+    rooms: RoomDto[];
 }
 
 export interface FileResponse {

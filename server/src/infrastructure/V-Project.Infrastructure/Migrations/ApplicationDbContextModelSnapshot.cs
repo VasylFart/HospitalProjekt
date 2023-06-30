@@ -73,7 +73,7 @@ namespace V_Project.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Dom Pomocy"
+                            Name = "Szpital"
                         });
                 });
 
@@ -189,6 +189,9 @@ namespace V_Project.Infrastructure.Migrations
                     b.Property<int>("StatisticId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CenterId");
@@ -196,6 +199,8 @@ namespace V_Project.Infrastructure.Migrations
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("StatisticId");
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Patients");
                 });
@@ -207,6 +212,11 @@ namespace V_Project.Infrastructure.Migrations
 
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("PublicationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getutcdate()");
 
                     b.HasKey("PatientId", "RoomId");
 
@@ -260,7 +270,7 @@ namespace V_Project.Infrastructure.Migrations
                     b.Property<Guid>("PatientId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("StatisticId")
+                    b.Property<int?>("StatisticId")
                         .HasColumnType("int");
 
                     b.Property<string>("Value")
@@ -268,8 +278,6 @@ namespace V_Project.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
 
                     b.HasIndex("StatisticId");
 
@@ -280,21 +288,18 @@ namespace V_Project.Infrastructure.Migrations
                         {
                             Id = 1,
                             PatientId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            StatisticId = 0,
                             Value = "Yellow"
                         },
                         new
                         {
                             Id = 2,
                             PatientId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            StatisticId = 0,
                             Value = "Orange"
                         },
                         new
                         {
                             Id = 3,
                             PatientId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            StatisticId = 0,
                             Value = "Green"
                         });
                 });
@@ -304,7 +309,7 @@ namespace V_Project.Infrastructure.Migrations
                     b.HasOne("V_Project.Domain.Patient", "Patient")
                         .WithOne("Address")
                         .HasForeignKey("V_Project.Domain.Address", "PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Patient");
@@ -315,13 +320,13 @@ namespace V_Project.Infrastructure.Migrations
                     b.HasOne("V_Project.Domain.Doctor", "Doctor")
                         .WithMany("Comments")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("V_Project.Domain.Patient", "Patient")
                         .WithMany("Comments")
                         .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Doctor");
@@ -334,7 +339,7 @@ namespace V_Project.Infrastructure.Migrations
                     b.HasOne("V_Project.Domain.Patient", "Patient")
                         .WithOne("Contact")
                         .HasForeignKey("V_Project.Domain.Contact", "PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Patient");
@@ -345,13 +350,13 @@ namespace V_Project.Infrastructure.Migrations
                     b.HasOne("V_Project.Domain.Center", "Center")
                         .WithMany("Doctors")
                         .HasForeignKey("CenterId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("V_Project.Domain.Statistic", "Statistic")
                         .WithMany("Doctors")
                         .HasForeignKey("StatisticId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Center");
@@ -364,19 +369,25 @@ namespace V_Project.Infrastructure.Migrations
                     b.HasOne("V_Project.Domain.Center", "Center")
                         .WithMany("Patients")
                         .HasForeignKey("CenterId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("V_Project.Domain.Doctor", "Doctor")
                         .WithMany("Patients")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("V_Project.Domain.Statistic", "Statistic")
                         .WithMany("Patients")
                         .HasForeignKey("StatisticId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("V_Project.Domain.Status", "Status")
+                        .WithMany("Patients")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Center");
@@ -384,6 +395,8 @@ namespace V_Project.Infrastructure.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Statistic");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("V_Project.Domain.PatientRoom", b =>
@@ -391,13 +404,13 @@ namespace V_Project.Infrastructure.Migrations
                     b.HasOne("V_Project.Domain.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("V_Project.Domain.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Patient");
@@ -410,7 +423,7 @@ namespace V_Project.Infrastructure.Migrations
                     b.HasOne("V_Project.Domain.Statistic", "Statistic")
                         .WithMany("Rooms")
                         .HasForeignKey("StatisticId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Statistic");
@@ -418,21 +431,9 @@ namespace V_Project.Infrastructure.Migrations
 
             modelBuilder.Entity("V_Project.Domain.Status", b =>
                 {
-                    b.HasOne("V_Project.Domain.Patient", "Patient")
+                    b.HasOne("V_Project.Domain.Statistic", null)
                         .WithMany("Statuses")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("V_Project.Domain.Statistic", "Statistic")
-                        .WithMany("Statuss")
-                        .HasForeignKey("StatisticId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("Statistic");
+                        .HasForeignKey("StatisticId");
                 });
 
             modelBuilder.Entity("V_Project.Domain.Center", b =>
@@ -457,8 +458,6 @@ namespace V_Project.Infrastructure.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Contact");
-
-                    b.Navigation("Statuses");
                 });
 
             modelBuilder.Entity("V_Project.Domain.Statistic", b =>
@@ -469,7 +468,12 @@ namespace V_Project.Infrastructure.Migrations
 
                     b.Navigation("Rooms");
 
-                    b.Navigation("Statuss");
+                    b.Navigation("Statuses");
+                });
+
+            modelBuilder.Entity("V_Project.Domain.Status", b =>
+                {
+                    b.Navigation("Patients");
                 });
 #pragma warning restore 612, 618
         }

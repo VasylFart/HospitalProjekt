@@ -26,6 +26,6 @@ public class RoomConfiguration : IEntityTypeConfiguration<Room>
 
                 pr.Property(x => x.PublicationDate).HasDefaultValueSql("getutcdate()");
             }
-            );
+        );
     }
 }

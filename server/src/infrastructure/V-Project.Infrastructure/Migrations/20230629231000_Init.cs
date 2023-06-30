@@ -51,13 +51,13 @@ namespace V_Project.Infrastructure.Migrations
                         column: x => x.CenterId,
                         principalTable: "Centers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Doctors_Statistic_StatisticId",
                         column: x => x.StatisticId,
                         principalTable: "Statistic",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,7 +77,27 @@ namespace V_Project.Infrastructure.Migrations
                         column: x => x.StatisticId,
                         principalTable: "Statistic",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Statuses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StatisticId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Statuses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Statuses_Statistic_StatisticId",
+                        column: x => x.StatisticId,
+                        principalTable: "Statistic",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -88,6 +108,7 @@ namespace V_Project.Infrastructure.Migrations
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
                     Pesel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
                     DoctorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StatisticId = table.Column<int>(type: "int", nullable: false),
                     CenterId = table.Column<int>(type: "int", nullable: false)
@@ -100,19 +121,25 @@ namespace V_Project.Infrastructure.Migrations
                         column: x => x.CenterId,
                         principalTable: "Centers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Patients_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Patients_Statistic_StatisticId",
                         column: x => x.StatisticId,
                         principalTable: "Statistic",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Patients_Statuses_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Statuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,7 +161,7 @@ namespace V_Project.Infrastructure.Migrations
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,13 +184,13 @@ namespace V_Project.Infrastructure.Migrations
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comments_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,7 +211,7 @@ namespace V_Project.Infrastructure.Migrations
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,7 +219,8 @@ namespace V_Project.Infrastructure.Migrations
                 columns: table => new
                 {
                     PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoomId = table.Column<int>(type: "int", nullable: false)
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    PublicationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()")
                 },
                 constraints: table =>
                 {
@@ -202,55 +230,28 @@ namespace V_Project.Infrastructure.Migrations
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PatientRooms_Rooms_RoomId",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Statuses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StatisticId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Statuses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Statuses_Patients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Statuses_Statistic_StatisticId",
-                        column: x => x.StatisticId,
-                        principalTable: "Statistic",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "Centers",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Dom Pomocy" });
+                values: new object[] { 1, "Szpital" });
 
             migrationBuilder.InsertData(
                 table: "Statuses",
                 columns: new[] { "Id", "PatientId", "StatisticId", "Value" },
                 values: new object[,]
                 {
-                    { 1, new Guid("00000000-0000-0000-0000-000000000000"), 0, "Yellow" },
-                    { 2, new Guid("00000000-0000-0000-0000-000000000000"), 0, "Orange" },
-                    { 3, new Guid("00000000-0000-0000-0000-000000000000"), 0, "Green" }
+                    { 1, new Guid("00000000-0000-0000-0000-000000000000"), null, "Yellow" },
+                    { 2, new Guid("00000000-0000-0000-0000-000000000000"), null, "Orange" },
+                    { 3, new Guid("00000000-0000-0000-0000-000000000000"), null, "Green" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -306,14 +307,14 @@ namespace V_Project.Infrastructure.Migrations
                 column: "StatisticId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Patients_StatusId",
+                table: "Patients",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rooms_StatisticId",
                 table: "Rooms",
                 column: "StatisticId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Statuses_PatientId",
-                table: "Statuses",
-                column: "PatientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Statuses_StatisticId",
@@ -336,16 +337,16 @@ namespace V_Project.Infrastructure.Migrations
                 name: "PatientRooms");
 
             migrationBuilder.DropTable(
-                name: "Statuses");
+                name: "Patients");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Patients");
+                name: "Doctors");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
+                name: "Statuses");
 
             migrationBuilder.DropTable(
                 name: "Centers");

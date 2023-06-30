@@ -10,18 +10,22 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
     {
         builder.HasOne(p => p.Address)
                 .WithOne(a => a.Patient)
-                 .HasForeignKey<Address>(a => a.PatientId);
+                 .HasForeignKey<Address>(a => a.PatientId)
+                  .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(p => p.Contact)
                 .WithOne(c => c.Patient)
-                 .HasForeignKey<Contact>(a => a.PatientId);
+                 .HasForeignKey<Contact>(a => a.PatientId)
+                  .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(p => p.Statuses)
-                .WithOne(t => t.Patient)
-                 .HasForeignKey(t => t.PatientId);
+        builder.HasOne(p => p.Status)
+                .WithMany(t => t.Patients)
+                 .HasForeignKey(t => t.StatusId)
+                  .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(d => d.Comments)
                     .WithOne(p => p.Patient)
-                     .HasForeignKey(p => p.PatientId);
+                     .HasForeignKey(p => p.PatientId)
+                      .OnDelete(DeleteBehavior.Restrict);
     }
 }

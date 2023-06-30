@@ -10,7 +10,8 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
     {
         builder.HasMany(d => d.Comments)
                 .WithOne(c => c.Doctor)
-                 .HasForeignKey(c => c.DoctorId);
+                 .HasForeignKey(c => c.DoctorId)
+                  .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(d => d.Patients)
                 .WithOne(p => p.Doctor)

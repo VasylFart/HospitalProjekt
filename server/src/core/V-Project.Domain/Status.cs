@@ -6,11 +6,7 @@ public class Status
 
     public string Value { get; set; }
 
-    public Patient Patient { get; set; }
+    public List<Patient> Patients { get; set; }
 
     public Guid PatientId { get; set; }
-
-    public Statistic Statistic { get; set; }
-
-    public int StatisticId { get; set; }
 }
