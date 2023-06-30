@@ -30,7 +30,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         
     public DbSet<Room> Rooms => Set<Room>();
 
-    public DbSet<Status> Statuses => Set<Status>();
+    public DbSet<Department> Depatments => Set<Department>();
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {

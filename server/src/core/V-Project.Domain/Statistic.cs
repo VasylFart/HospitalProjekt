@@ -8,7 +8,7 @@ public class Statistic
 
     public List<Patient> Patients { get; set;}
 
-    public List<Status> Statuses { get; set;}
+    public List<Department> Statuses { get; set;}
 
     public List<Room> Rooms { get; set;}
 }

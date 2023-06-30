@@ -14,9 +14,9 @@ public class Patient
 
     public Contact? Contact { get; set; }
 
-    public Status Status { get; set; }
+    public Department Department { get; set; }
 
-    public int StatusId { get; set; }
+    public int DepartmentId { get; set; }
 
     public List<Room> Rooms { get; set; }
 

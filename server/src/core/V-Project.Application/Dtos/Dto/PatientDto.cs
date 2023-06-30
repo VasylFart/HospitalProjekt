@@ -17,7 +17,7 @@ public class PatientDto
 
     public ContactDto? Contact { get; set; }
 
-    public List<StatusDto> Statuses { get; set; }
+    public List<DepartmentDto> Statuses { get; set; }
 
     public List<RoomDto> Rooms { get; set; }
 

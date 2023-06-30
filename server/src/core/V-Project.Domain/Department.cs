@@ -1,6 +1,6 @@
 ﻿namespace V_Project.Domain;
 
-public class Status
+public class Department
 {
     public int Id { get; set; }
 

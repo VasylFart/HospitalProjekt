@@ -8,7 +8,7 @@ public class StatisticDto
 
     public List<PatientDto> Patients { get; set; }
 
-    public List<StatusDto> Statuss { get; set; }
+    public List<DepartmentDto> Statuss { get; set; }
 
     public List<RoomDto> Rooms { get; set; }
 }

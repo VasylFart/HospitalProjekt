@@ -1,6 +1,6 @@
 ﻿namespace V_Project.Application;
 
-public class StatusDto
+public class DepartmentDto
 {
     public int Id { get; set; }
 

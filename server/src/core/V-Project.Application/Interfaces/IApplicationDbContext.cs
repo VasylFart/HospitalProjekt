@@ -21,7 +21,7 @@ public interface IApplicationDbContext : IDisposable
 
     DbSet<Room> Rooms { get; }
 
-    DbSet<Status> Statuses { get; }
+    DbSet<Department> Depatments { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

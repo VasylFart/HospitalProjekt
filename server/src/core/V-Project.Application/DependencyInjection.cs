@@ -21,7 +21,7 @@ public static class DependencyInjection
 
         services.AddScoped<IContactService, ContactService>();
 
-        services.AddScoped<IStatusService, StatusService>();
+        services.AddScoped<IDepartmentDepartment, DepartmentService>();
 
         return services;
     }
