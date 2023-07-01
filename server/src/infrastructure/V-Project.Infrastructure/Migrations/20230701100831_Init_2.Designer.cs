@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using V_Project.Infrastructure;
 
@@ -11,9 +12,10 @@ using V_Project.Infrastructure;
 namespace V_Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230701100831_Init_2")]
+    partial class Init_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,11 +151,16 @@ namespace V_Project.Infrastructure.Migrations
                     b.Property<Guid>("PatientId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("StatisticId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Value")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StatisticId");
 
                     b.ToTable("Depatments");
 
@@ -191,9 +198,14 @@ namespace V_Project.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("StatisticId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CenterId");
+
+                    b.HasIndex("StatisticId");
 
                     b.ToTable("Doctors");
                 });
@@ -224,6 +236,9 @@ namespace V_Project.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("StatisticId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CenterId");
@@ -231,6 +246,8 @@ namespace V_Project.Infrastructure.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.HasIndex("DoctorId");
+
+                    b.HasIndex("StatisticId");
 
                     b.ToTable("Patients");
                 });
@@ -266,9 +283,27 @@ namespace V_Project.Infrastructure.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
+                    b.Property<int>("StatisticId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("StatisticId");
+
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("V_Project.Domain.Statistic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statistic");
                 });
 
             modelBuilder.Entity("V_Project.Domain.Address", b =>
@@ -312,6 +347,13 @@ namespace V_Project.Infrastructure.Migrations
                     b.Navigation("Patient");
                 });
 
+            modelBuilder.Entity("V_Project.Domain.Department", b =>
+                {
+                    b.HasOne("V_Project.Domain.Statistic", null)
+                        .WithMany("Departments")
+                        .HasForeignKey("StatisticId");
+                });
+
             modelBuilder.Entity("V_Project.Domain.Doctor", b =>
                 {
                     b.HasOne("V_Project.Domain.Center", "Center")
@@ -320,7 +362,15 @@ namespace V_Project.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("V_Project.Domain.Statistic", "Statistic")
+                        .WithMany("Doctors")
+                        .HasForeignKey("StatisticId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Center");
+
+                    b.Navigation("Statistic");
                 });
 
             modelBuilder.Entity("V_Project.Domain.Patient", b =>
@@ -343,11 +393,19 @@ namespace V_Project.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("V_Project.Domain.Statistic", "Statistic")
+                        .WithMany("Patients")
+                        .HasForeignKey("StatisticId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Center");
 
                     b.Navigation("Department");
 
                     b.Navigation("Doctor");
+
+                    b.Navigation("Statistic");
                 });
 
             modelBuilder.Entity("V_Project.Domain.PatientRoom", b =>
@@ -367,6 +425,17 @@ namespace V_Project.Infrastructure.Migrations
                     b.Navigation("Patient");
 
                     b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("V_Project.Domain.Room", b =>
+                {
+                    b.HasOne("V_Project.Domain.Statistic", "Statistic")
+                        .WithMany("Rooms")
+                        .HasForeignKey("StatisticId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Statistic");
                 });
 
             modelBuilder.Entity("V_Project.Domain.Center", b =>
@@ -396,6 +465,17 @@ namespace V_Project.Infrastructure.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Contact");
+                });
+
+            modelBuilder.Entity("V_Project.Domain.Statistic", b =>
+                {
+                    b.Navigation("Departments");
+
+                    b.Navigation("Doctors");
+
+                    b.Navigation("Patients");
+
+                    b.Navigation("Rooms");
                 });
 #pragma warning restore 612, 618
         }

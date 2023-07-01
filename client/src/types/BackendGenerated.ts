@@ -16,13 +16,12 @@ export interface PatientDto {
     age: number;
     dateOfBirth: Date;
     pesel: string;
-    address: AddressDto;
-    contact?: ContactDto | undefined;
-    statuses: DepartmentDto[];
-    rooms: RoomDto[];
-    doctor: DoctorDto;
-    comments: CommentDto[];
-    center: CenterDto;
+}
+
+export interface PostPatientDto {
+    fullName: string;
+    dateOfBirth: Date;
+    pesel: string;
 }
 
 export interface AddressDto {
@@ -31,55 +30,6 @@ export interface AddressDto {
     city?: string | undefined;
     street: string;
     numberHome: number;
-    patient: PatientDto;
-}
-
-export interface ContactDto {
-    id: number;
-    mobilePhone?: string | undefined;
-    email?: string | undefined;
-    patient: PatientDto;
-}
-
-export interface DepartmentDto {
-    id: number;
-    value: string;
-    patient: PatientDto;
-}
-
-export interface RoomDto {
-    id: number;
-    number: number;
-    patients: PatientDto[];
-}
-
-export interface DoctorDto {
-    id: string;
-    fullName: string;
-    patients: PatientDto[];
-    center: CenterDto;
-}
-
-export interface CenterDto {
-    id: number;
-    name: string;
-    patients: PatientDto[];
-    doctors: DoctorDto[];
-}
-
-export interface CommentDto {
-    id: number;
-    message: string;
-    createdDate: Date;
-    updatedDate?: Date | undefined;
-    doctor: DoctorDto;
-    patient: PatientDto;
-}
-
-export interface PostPatientDto {
-    fullName: string;
-    dateOfBirth: Date;
-    pesel: string;
 }
 
 export interface PostAddressDto {
@@ -89,8 +39,20 @@ export interface PostAddressDto {
     numberHome: number;
 }
 
+export interface CenterDto {
+    id: number;
+    name: string;
+}
+
 export interface PostCenterDto {
     name: string;
+}
+
+export interface CommentDto {
+    id: number;
+    message: string;
+    createdDate: Date;
+    updatedDate?: Date | undefined;
 }
 
 export interface PostCommentDto {
@@ -99,17 +61,38 @@ export interface PostCommentDto {
     updatedDate?: Date | undefined;
 }
 
+export interface ContactDto {
+    id: number;
+    mobilePhone?: string | undefined;
+    email?: string | undefined;
+}
+
 export interface PostContactDto {
     mobilePhone?: string | undefined;
     email?: string | undefined;
+}
+
+export interface DepartmentDto {
+    id: number;
+    value: string;
 }
 
 export interface PostDepartmentDto {
     value: string;
 }
 
+export interface DoctorDto {
+    id: string;
+    fullName: string;
+}
+
 export interface PostDoctorDto {
     fullName: string;
+}
+
+export interface RoomDto {
+    id: number;
+    number: number;
 }
 
 export interface PostRoomDto {

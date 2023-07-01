@@ -7,6 +7,4 @@ public class ContactDto
     public string? MobilePhone { get; set; }
 
     public string? Email { get; set; }
-
-    public PatientDto Patient { get; set; }
 }

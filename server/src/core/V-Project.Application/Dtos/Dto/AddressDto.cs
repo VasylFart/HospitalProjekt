@@ -11,6 +11,4 @@ public class AddressDto
     public string Street { get; set; }
 
     public int NumberHome { get; set; }
-
-    public PatientDto Patient { get; set; }
 }

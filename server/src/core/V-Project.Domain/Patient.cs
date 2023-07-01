@@ -26,10 +26,6 @@ public class Patient
 
     public List<Comment> Comments { get; set; }
 
-    public Statistic Statistic { get; set; }
-
-    public int StatisticId { get; set; }
-
     public Center Center { get; set; }
 
     public int CenterId { get; set; }

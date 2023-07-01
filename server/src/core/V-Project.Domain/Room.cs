@@ -7,8 +7,4 @@ public class Room
     public int Number { get; set; }
     
     public List<Patient> Patients { get; set; }
-
-    public Statistic Statistic { get; set; }
-
-    public int StatisticId { get; set; }
 }
