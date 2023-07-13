@@ -18,7 +18,7 @@ public class AddressService : IAddressService
             Country = newPostAddressDto.Country,
             City = newPostAddressDto.City,
             Street = newPostAddressDto.Street,
-            NumberHome = newPostAddressDto.NumberHome
+            HomeNumber = newPostAddressDto.HomeNumber
         };
 
         dbContext.Addresses.Add(newAddress);
@@ -30,7 +30,7 @@ public class AddressService : IAddressService
             Country = newAddress.Country,
             City = newAddress.City,
             Street = newAddress.Street,
-            NumberHome = newAddress.NumberHome
+            HomeNumber = newAddress.HomeNumber
         };
     }
 
@@ -57,7 +57,7 @@ public class AddressService : IAddressService
             Country = c.Country,
             City = c.City,
             Street = c.Street,
-            NumberHome = c.NumberHome
+            HomeNumber = c.HomeNumber
         });
     }
 
@@ -75,7 +75,7 @@ public class AddressService : IAddressService
             address.Country = addressDto.Country;
             address.City = addressDto.City;
             address.Street = addressDto.Street;
-            address.NumberHome = addressDto.NumberHome;
+            address.HomeNumber = addressDto.HomeNumber;
 
             dbContext.Addresses.Update(address);
             dbContext.SaveChangesAsync();
@@ -94,7 +94,7 @@ public class AddressService : IAddressService
             Country = updatedAddress.Country,
             City = updatedAddress.City,
             Street = updatedAddress.Street,
-            NumberHome = updatedAddress.NumberHome
+            HomeNumber = updatedAddress.HomeNumber
         };
     }
 }

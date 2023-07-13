@@ -10,5 +10,5 @@ public class AddressDto
 
     public string Street { get; set; }
 
-    public int NumberHome { get; set; }
+    public string HomeNumber { get; set; }
 }

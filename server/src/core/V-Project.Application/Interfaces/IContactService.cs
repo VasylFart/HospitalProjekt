@@ -6,7 +6,7 @@ public interface IContactService
 
     public ContactDto AddNewContact(PostContactDto newPostContactDto);
 
-    public ContactDto UpdateContact(PostContactDto contactDto, int id);
+    public ContactDto UpdateContact(PostContactDto contactDto, Guid id);
 
-    public void DeleteContact(int id);
+    public void DeleteContact(Guid id);
 }

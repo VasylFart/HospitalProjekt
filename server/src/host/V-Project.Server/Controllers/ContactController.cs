@@ -39,7 +39,7 @@ public class ContactController : Controller
     }
 
     [HttpPut("contacts/{id}")]
-    public ContactDto Put([FromBody] PostContactDto contactDto, int id)
+    public ContactDto Put([FromBody] PostContactDto contactDto, Guid id)
     {
         logger.LogInformation("Updating Contact");
 
@@ -47,7 +47,7 @@ public class ContactController : Controller
     }
 
     [HttpDelete("contacts/{id}")]
-    public ActionResult Delete(int id)
+    public ActionResult Delete(Guid id)
     {
         logger.LogInformation("Deleting Contact");
 

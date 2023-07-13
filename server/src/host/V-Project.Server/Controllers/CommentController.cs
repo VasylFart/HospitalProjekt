@@ -39,7 +39,7 @@ public class CommentController : Controller
     }
 
     [HttpPut("comments/{id}")]
-    public CommentDto Put([FromBody] PostCommentDto commentDto, int id)
+    public CommentDto Put([FromBody] PostCommentDto commentDto, Guid id)
     {
         logger.LogInformation("Updating Comment");
 
@@ -47,7 +47,7 @@ public class CommentController : Controller
     }
 
     [HttpDelete("comments/{id}")]
-    public ActionResult Delete(int id)
+    public ActionResult Delete(Guid id)
     {
         logger.LogInformation("Deleting Comment");
 

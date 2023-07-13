@@ -12,13 +12,15 @@ public class Patient
 
     public Address Address { get; set; }
 
-    public Contact? Contact { get; set; }
+    public Contact Contact { get; set; }
 
     public Department Department { get; set; }
 
     public int DepartmentId { get; set; }
 
-    public List<Room> Rooms { get; set; }
+    public Room Room { get; set; }
+
+    public Guid RoomId { get; set; }
 
     public Doctor Doctor { get; set; }
 

@@ -6,7 +6,7 @@ public interface ICommentService
 
     public CommentDto AddNewComment(PostCommentDto newPostCommentDto);
 
-    public CommentDto UpdateComment(PostCommentDto commentDto, int id);
+    public CommentDto UpdateComment(PostCommentDto commentDto, Guid id);
 
-    public void DeleteComment(int id);
+    public void DeleteComment(Guid id);
 }

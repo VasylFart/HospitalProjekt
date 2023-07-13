@@ -29,14 +29,14 @@ export interface AddressDto {
     country: string;
     city?: string | undefined;
     street: string;
-    numberHome: number;
+    homeNumber: string;
 }
 
 export interface PostAddressDto {
     country: string;
     city?: string | undefined;
     street: string;
-    numberHome: number;
+    homeNumber: string;
 }
 
 export interface CenterDto {
@@ -49,7 +49,7 @@ export interface PostCenterDto {
 }
 
 export interface CommentDto {
-    id: number;
+    id: string;
     message: string;
     createdDate: Date;
     updatedDate?: Date | undefined;
@@ -57,8 +57,6 @@ export interface CommentDto {
 
 export interface PostCommentDto {
     message: string;
-    createdDate: Date;
-    updatedDate?: Date | undefined;
 }
 
 export interface ContactDto {

@@ -16,7 +16,7 @@ public class CommentService : ICommentService
         var newComment = new Comment()
         {
             Message = newPostCommentDto.Message,
-            CreatedDate= newPostCommentDto.CreatedDate
+            CreatedDate = DateTime.UtcNow
         };
 
         dbContext.Comments.Add(newComment);
@@ -30,7 +30,7 @@ public class CommentService : ICommentService
         };
     }
 
-    public void DeleteComment(int id)
+    public void DeleteComment(Guid id)
     {
         var comment = dbContext.Comments.FirstOrDefault(c => c.Id == id);
 
@@ -55,7 +55,7 @@ public class CommentService : ICommentService
         });
     }
 
-    public CommentDto UpdateComment(PostCommentDto commentDto, int id)
+    public CommentDto UpdateComment(PostCommentDto commentDto, Guid id)
     {
         var comment = dbContext.Comments.FirstOrDefault(c => c.Id == id);
 

@@ -31,7 +31,7 @@ public class ContactService : IContactService
         };
     }
 
-    public void DeleteContact(int id)
+    public void DeleteContact(Guid id)
     {
         var contact = dbContext.Contacts.FirstOrDefault(c => c.Id == id);
 
@@ -56,7 +56,7 @@ public class ContactService : IContactService
         });
     }
 
-    public ContactDto UpdateContact(PostContactDto contactDto, int id)
+    public ContactDto UpdateContact(PostContactDto contactDto, Guid id)
     {
         var contact = dbContext.Contacts.FirstOrDefault(c => c.Id == id);
 
