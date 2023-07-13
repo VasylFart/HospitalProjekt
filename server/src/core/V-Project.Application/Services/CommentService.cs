@@ -26,7 +26,7 @@ public class CommentService : ICommentService
         {
             Id = newComment.Id,
             Message = newComment.Message,
-            CreatedDate = newComment.CreatedDate
+            CreatedDate = DateTime.UtcNow
         };
     }
 
