@@ -11,42 +11,6 @@ public class AddressService : IAddressService
         this.dbContext = dbContext;
     }
 
-    public AddressDto AddNewAddress(PostAddressDto newPostAddressDto)
-    {
-        var newAddress = new Address()
-        {
-            Country = newPostAddressDto.Country,
-            City = newPostAddressDto.City,
-            Street = newPostAddressDto.Street,
-            HomeNumber = newPostAddressDto.HomeNumber
-        };
-
-        dbContext.Addresses.Add(newAddress);
-        dbContext.SaveChangesAsync();
-
-        return new AddressDto
-        {
-            Id = newAddress.Id,
-            Country = newAddress.Country,
-            City = newAddress.City,
-            Street = newAddress.Street,
-            HomeNumber = newAddress.HomeNumber
-        };
-    }
-
-    public void DeleteAddress(Guid id)
-    {
-        var address = dbContext.Addresses.FirstOrDefault(c => c.Id == id);
-
-        if (address == null)
-        {
-            throw new ClientException($"Address with Id: {id} doesn`t exist.");
-        }
-
-        dbContext.Addresses.Remove(address);
-        dbContext.SaveChangesAsync();
-    }
-
     public IEnumerable<AddressDto> GetAddresses()
     {
         var result = dbContext.Addresses.ToList();

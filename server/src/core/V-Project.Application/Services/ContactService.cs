@@ -11,39 +11,6 @@ public class ContactService : IContactService
         this.dbContext = dbContext;
     }
 
-    public ContactDto AddNewContact(PostContactDto newPostContactDto)
-    {
-        var newContact = new Contact()
-        {
-            MobilePhone = newPostContactDto.MobilePhone,
-            Email = newPostContactDto.Email
-
-        };
-
-        dbContext.Contacts.Add(newContact);
-        dbContext.SaveChangesAsync();
-
-        return new ContactDto
-        {
-            Id = newContact.Id,
-            MobilePhone = newContact.MobilePhone,
-            Email = newContact.Email
-        };
-    }
-
-    public void DeleteContact(Guid id)
-    {
-        var contact = dbContext.Contacts.FirstOrDefault(c => c.Id == id);
-
-        if (contact == null)
-        {
-            throw new ClientException($"Contact with Id: {id} doesn`t exist.");
-        }
-
-        dbContext.Contacts.Remove(contact);
-        dbContext.SaveChangesAsync();
-    }
-
     public IEnumerable<ContactDto> GetContact()
     {
         var result = dbContext.Contacts.ToList();

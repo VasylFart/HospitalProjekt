@@ -13,8 +13,8 @@
 export interface PatientDto {
     id: string;
     fullName: string;
-    age: number;
     dateOfBirth: Date;
+    age: number;
     pesel: string;
 }
 
@@ -23,6 +23,8 @@ export interface PostPatientDto {
     dateOfBirth: Date;
     pesel: string;
     address: PostAddressDto;
+    contact: PostContactDto;
+    comment: PostCommentDto;
     doctorId: string;
     departmentId: string;
     roomId: string;
@@ -33,6 +35,15 @@ export interface PostAddressDto {
     city: string;
     street: string;
     homeNumber: string;
+}
+
+export interface PostContactDto {
+    mobilePhone: string;
+    email: string;
+}
+
+export interface PostCommentDto {
+    message: string;
 }
 
 export interface AddressDto {
@@ -50,24 +61,10 @@ export interface CommentDto {
     updatedDate?: Date | undefined;
 }
 
-export interface PostCommentDto {
-    message: string;
-    createdDate: Date;
-    updatedDate?: Date | undefined;
-    patientId: string;
-    doctorId: string;
-}
-
 export interface ContactDto {
     id: string;
     mobilePhone: string;
     email: string;
-}
-
-export interface PostContactDto {
-    mobilePhone?: string | undefined;
-    email?: string | undefined;
-    patientId: string;
 }
 
 export interface DepartmentDto {
@@ -86,15 +83,19 @@ export interface DoctorDto {
 
 export interface PostDoctorDto {
     fullName: string;
+    departmentId: string;
 }
 
 export interface RoomDto {
     id: string;
     number: number;
+    freeSlots: number;
 }
 
 export interface PostRoomDto {
     number: number;
+    departmentId: string;
+    capacity: number;
 }
 
 export interface FileResponse {

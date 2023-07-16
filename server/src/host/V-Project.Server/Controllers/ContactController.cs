@@ -24,35 +24,12 @@ public class ContactController : Controller
         return service.GetContact();
     }
 
-    [HttpPost("contacts")]
-    public ContactDto Post([FromBody] PostContactDto contactDto)
-    {
-        if (contactDto == null)
-        {
-            HttpContext.Response.StatusCode = 400;
-            return null;
-        }
-
-        logger.LogInformation("Adding Contact");
-
-        return service.AddNewContact(contactDto);
-    }
-
     [HttpPut("contacts/{id}")]
     public ContactDto Put([FromBody] PostContactDto contactDto, Guid id)
     {
         logger.LogInformation("Updating Contact");
 
         return service.UpdateContact(contactDto, id);
-    }
-
-    [HttpDelete("contacts/{id}")]
-    public ActionResult Delete(Guid id)
-    {
-        logger.LogInformation("Deleting Contact");
-
-        service.DeleteContact(id);
-        return Ok();
     }
 }
 

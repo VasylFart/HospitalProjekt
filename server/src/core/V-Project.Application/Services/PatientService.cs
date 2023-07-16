@@ -26,48 +26,61 @@ public class PatientService : IPatientService
 
     public PatientDto AddNewPatient(PostPatientDto newPostPatient)
     {
-        var newPatient = new Patient
+        var room = dbContext.Rooms.FirstOrDefault(r => r.Id == Guid.Parse(newPostPatient.RoomId));
+
+        if (room != null && room.FreeSlots > 0)
         {
-            FullName = newPostPatient.FullName,
-            DateOfBirth = newPostPatient.DateOfBirth,
-            Pesel = newPostPatient.Pesel,
-
-            Address = new Address
+            var newPatient = new Patient
             {
-                Country = newPostPatient.Address.Country,
-                City = newPostPatient.Address.City,
-                Street = newPostPatient.Address.Street,
-                HomeNumber = newPostPatient.Address.HomeNumber
-            },
+                FullName = newPostPatient.FullName,
+                DateOfBirth = newPostPatient.DateOfBirth,
+                Pesel = newPostPatient.Pesel,
 
-            Contact = new Contact
+                Address = new Address
+                {
+                    Country = newPostPatient.Address.Country,
+                    City = newPostPatient.Address.City,
+                    Street = newPostPatient.Address.Street,
+                    HomeNumber = newPostPatient.Address.HomeNumber
+                },
+
+                Contact = new Contact
+                {
+                    MobilePhone = newPostPatient.Contact.MobilePhone,
+                    Email = newPostPatient.Contact.Email
+                },
+
+                DoctorId = Guid.Parse(newPostPatient.DoctorId),
+
+                DepartmentId = Guid.Parse(newPostPatient.DepartmentId),
+
+                RoomId = Guid.Parse(newPostPatient.RoomId),
+
+                Comment = new Comment
+                {
+                    Message = newPostPatient.Comment.Message
+                },
+            };
+
+            room.OccupiedSlots++;
+
+            dbContext.Patients.Add(newPatient);
+            dbContext.SaveChangesAsync();
+
+            return new PatientDto
             {
-                MobilePhone = newPostPatient.Contact.MobilePhone,
-                Email = newPostPatient.Contact.Email
-            },
+                Id = newPatient.Id,
+                FullName = newPatient.FullName,
+                DateOfBirth = newPatient.DateOfBirth,
+                Pesel = newPatient.Pesel
+            };
+        }
 
-            DoctorId = Guid.Parse(newPostPatient.DoctorId),
-
-            DepartmentId = Guid.Parse(newPostPatient.DepartmentId),
-
-            RoomId = Guid.Parse(newPostPatient.RoomId),
-
-            Comment = new Comment
-            {
-                Message = newPostPatient.Comment.Message
-            },
-        };
-
-        dbContext.Patients.Add(newPatient);
-        dbContext.SaveChangesAsync();
-
-        return new PatientDto
+        else
         {
-            Id = newPatient.Id,
-            FullName = newPatient.FullName,
-            DateOfBirth = newPatient.DateOfBirth,
-            Pesel = newPatient.Pesel
-        };
+            throw new ClientException("Cannot add a patient. The room is full.");
+        }
+            
     }
 
     public PatientDto UpdatePatient(PostPatientDto postPatientDto, Guid id)

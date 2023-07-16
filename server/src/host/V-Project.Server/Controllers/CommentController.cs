@@ -24,35 +24,12 @@ public class CommentController : Controller
         return service.GetComment();
     }
 
-    [HttpPost("comments")]
-    public CommentDto Post([FromBody] PostCommentDto commentDto)
-    {
-        if (commentDto == null)
-        {
-            HttpContext.Response.StatusCode = 400;
-            return null;
-        }
-
-        logger.LogInformation("Adding Comment");
-
-        return service.AddNewComment(commentDto);
-    }
-
     [HttpPut("comments/{id}")]
     public CommentDto Put([FromBody] PostCommentDto commentDto, Guid id)
     {
         logger.LogInformation("Updating Comment");
 
         return service.UpdateComment(commentDto, id);
-    }
-
-    [HttpDelete("comments/{id}")]
-    public ActionResult Delete(Guid id)
-    {
-        logger.LogInformation("Deleting Comment");
-
-        service.DeleteComment(id);
-        return Ok();
     }
 }
 

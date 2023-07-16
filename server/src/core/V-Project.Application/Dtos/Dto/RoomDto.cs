@@ -5,4 +5,6 @@ public class RoomDto
     public Guid Id { get; set; }
 
     public int Number { get; set; }
+
+    public int FreeSlots { get; set; }
 }

@@ -16,6 +16,7 @@ public class RoomService : IRoomService
         var newRoom = new Room
         {
             Number = newPostRoomDto.Number,
+            Capacity = newPostRoomDto.Capacity,
             DepartmentId = Guid.Parse(newPostRoomDto.DepartmentId)
         };
 
@@ -25,7 +26,8 @@ public class RoomService : IRoomService
         return new RoomDto
         {
             Id = newRoom.Id,
-            Number = newRoom.Number
+            Number = newRoom.Number,
+            FreeSlots = newRoom.FreeSlots
         };
     }
 

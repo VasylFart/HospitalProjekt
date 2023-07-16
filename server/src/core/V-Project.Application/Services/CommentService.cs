@@ -11,38 +11,6 @@ public class CommentService : ICommentService
             this.dbContext = dbContext;
         }
 
-    public CommentDto AddNewComment(PostCommentDto newPostCommentDto)
-    {
-        var newComment = new Comment()
-        {
-            Message = newPostCommentDto.Message,
-            CreatedDate = newPostCommentDto.CreatedDate
-        };
-
-        dbContext.Comments.Add(newComment);
-        dbContext.SaveChangesAsync();
-
-        return new CommentDto
-        {
-            Id = newComment.Id,
-            Message = newComment.Message,
-            CreatedDate = newComment.CreatedDate,
-        };
-    }
-
-    public void DeleteComment(Guid id)
-    {
-        var comment = dbContext.Comments.FirstOrDefault(c => c.Id == id);
-
-        if (comment == null)
-        {
-            throw new ClientException($"Comment with Id: {id} doesn`t exist.");
-        }
-
-        dbContext.Comments.Remove(comment);
-        dbContext.SaveChangesAsync();
-    }
-
     public IEnumerable<CommentDto> GetComment()
     {
         var result = dbContext.Comments.ToList();
@@ -51,8 +19,7 @@ public class CommentService : ICommentService
         {
             Id = c.Id,
             Message = c.Message,
-            CreatedDate = c.CreatedDate,
-            UpdatedDate = c.UpdatedDate
+            UpdatedDate = c.UpdatedDate ?? c.CreatedDate
         });
     }
 
@@ -68,7 +35,6 @@ public class CommentService : ICommentService
         if (comment != null)
         {
             comment.Message = commentDto.Message;
-            comment.UpdatedDate = commentDto.UpdatedDate;
 
             dbContext.Comments.Update(comment);
             dbContext.SaveChangesAsync();
