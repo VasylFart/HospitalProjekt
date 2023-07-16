@@ -14,7 +14,7 @@ public class DepartmentService : IDepartmentDepartment
 
     public DepartmentDto AddNewDepartment(PostDepartmentDto newPostDepartmentDto)
     {
-        var newDepartment = new Department()
+        var newDepartment = new Department
         {
             Value = newPostDepartmentDto.Value
         };
@@ -29,7 +29,7 @@ public class DepartmentService : IDepartmentDepartment
         };
     }
 
-    public void DeleteDepartment(int id)
+    public void DeleteDepartment(Guid id)
     {
         var status = dbContext.Depatments.FirstOrDefault(s => s.Id == id);
 
@@ -53,7 +53,7 @@ public class DepartmentService : IDepartmentDepartment
         });
     }
 
-    public DepartmentDto UpdateDepartment(PostDepartmentDto departmentDto, int id)
+    public DepartmentDto UpdateDepartment(PostDepartmentDto departmentDto, Guid id)
     {
         var department = dbContext.Depatments.FirstOrDefault(s => s.Id == id);
 

@@ -40,7 +40,7 @@ namespace V_Project.Server.Controllers
         }
 
         [HttpPut("departments/{id}")]
-        public DepartmentDto Put([FromBody] PostDepartmentDto departmentDto, int id)
+        public DepartmentDto Put([FromBody] PostDepartmentDto departmentDto, Guid id)
         {
             logger.LogInformation("Updating Department");
 
@@ -48,7 +48,7 @@ namespace V_Project.Server.Controllers
         }
 
         [HttpDelete("departments/{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             logger.LogInformation("Deleting Department");
 

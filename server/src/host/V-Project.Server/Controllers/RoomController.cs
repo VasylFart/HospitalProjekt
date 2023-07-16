@@ -39,7 +39,7 @@ public class RoomController : Controller
     }
 
     [HttpPut("rooms/{id}")]
-    public RoomDto Put([FromBody] PostRoomDto roomDto, int id)
+    public RoomDto Put([FromBody] PostRoomDto roomDto, Guid id)
     {
         logger.LogInformation("Updating Room");
 
@@ -47,7 +47,7 @@ public class RoomController : Controller
     }
 
     [HttpDelete("rooms/{id}")]
-    public ActionResult Delete(int id)
+    public ActionResult Delete(Guid id)
     {
         logger.LogInformation("Deleting Room");
 

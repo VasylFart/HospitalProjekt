@@ -6,7 +6,7 @@ public interface IRoomService
 
     public RoomDto AddNewRoom(PostRoomDto newPostRoomDto);
 
-    public RoomDto UpdateRoom(PostRoomDto roomDto, int id);
+    public RoomDto UpdateRoom(PostRoomDto roomDto, Guid id);
 
-    public void DeleteRoom(int id);
+    public void DeleteRoom(Guid id);
 }

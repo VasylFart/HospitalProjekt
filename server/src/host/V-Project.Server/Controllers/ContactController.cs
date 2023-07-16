@@ -17,7 +17,7 @@ public class ContactController : Controller
     }
 
     [HttpGet("contacts")]
-    public IEnumerable<ContactDto> GetCenters()
+    public IEnumerable<ContactDto> GetContacts()
     {
         logger.LogInformation("Getting Contact");
 

@@ -8,9 +8,7 @@ public class Doctor
 
     public List<Patient> Patients { get; set; }
 
-    public List<Comment> Comments { get; set; }
+    public Department Department { get; set; }
 
-    public Center Center { get; set; }
-
-    public int CenterId { get; set; }
+    public Guid DepartmetId { get; set; }
 }

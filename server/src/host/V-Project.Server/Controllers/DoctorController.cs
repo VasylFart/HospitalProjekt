@@ -33,7 +33,7 @@ public class DoctorController : Controller
             return null;
         }
 
-        logger.LogInformation("Adding Center");
+        logger.LogInformation("Adding Doctor");
 
         return service.AddNewDoctor(doctorDto);
     }

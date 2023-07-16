@@ -16,7 +16,7 @@ public class CommentService : ICommentService
         var newComment = new Comment()
         {
             Message = newPostCommentDto.Message,
-            CreatedDate = DateTime.UtcNow
+            CreatedDate = newPostCommentDto.CreatedDate
         };
 
         dbContext.Comments.Add(newComment);
@@ -26,7 +26,7 @@ public class CommentService : ICommentService
         {
             Id = newComment.Id,
             Message = newComment.Message,
-            CreatedDate = DateTime.UtcNow
+            CreatedDate = newComment.CreatedDate,
         };
     }
 
@@ -51,7 +51,8 @@ public class CommentService : ICommentService
         {
             Id = c.Id,
             Message = c.Message,
-            CreatedDate = c.CreatedDate
+            CreatedDate = c.CreatedDate,
+            UpdatedDate = c.UpdatedDate
         });
     }
 
@@ -67,6 +68,7 @@ public class CommentService : ICommentService
         if (comment != null)
         {
             comment.Message = commentDto.Message;
+            comment.UpdatedDate = commentDto.UpdatedDate;
 
             dbContext.Comments.Update(comment);
             dbContext.SaveChangesAsync();

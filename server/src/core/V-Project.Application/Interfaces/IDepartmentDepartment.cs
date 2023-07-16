@@ -6,8 +6,8 @@
 
         public DepartmentDto AddNewDepartment(PostDepartmentDto newPostDepartmentDto);
 
-        public DepartmentDto UpdateDepartment(PostDepartmentDto departmentDto, int id);
+        public DepartmentDto UpdateDepartment(PostDepartmentDto departmentDto, Guid id);
 
-        public void DeleteDepartment(int id);
+        public void DeleteDepartment(Guid id);
     }
 }

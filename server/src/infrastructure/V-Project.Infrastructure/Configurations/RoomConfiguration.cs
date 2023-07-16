@@ -8,24 +8,9 @@ public class RoomConfiguration : IEntityTypeConfiguration<Room>
 {
     public void Configure(EntityTypeBuilder<Room> builder)
     {
-        builder.HasMany(r => r.Patients)
-                .WithMany(p => p.Rooms)
-                 .UsingEntity<PatientRoom>(
-            r => r.HasOne(pr => pr.Patient)
-                   .WithMany()
-                    .HasForeignKey(pr => pr.PatientId)
-                     .OnDelete(DeleteBehavior.Restrict),
-
-            p => p.HasOne(pr => pr.Room)
-                   .WithMany()
-                    .HasForeignKey(pr => pr.RoomId)
-                     .OnDelete(DeleteBehavior.Restrict),
-            pr =>
-            {
-                pr.HasKey(x => new { x.PatientId, x.RoomId });
-
-                pr.Property(x => x.PublicationDate).HasDefaultValueSql("getutcdate()");
-            }
-        );
+        builder.HasMany(d => d.Patients)
+                .WithOne(p => p.Room)
+                 .HasForeignKey(p => p.RoomId)
+                  .OnDelete(DeleteBehavior.Restrict);
     }
 }

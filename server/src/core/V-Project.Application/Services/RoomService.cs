@@ -13,9 +13,10 @@ public class RoomService : IRoomService
 
     public RoomDto AddNewRoom(PostRoomDto newPostRoomDto)
     {
-        var newRoom = new Room()
+        var newRoom = new Room
         {
             Number = newPostRoomDto.Number,
+            DepartmentId = Guid.Parse(newPostRoomDto.DepartmentId)
         };
 
         dbContext.Rooms.Add(newRoom);
@@ -28,7 +29,7 @@ public class RoomService : IRoomService
         };
     }
 
-    public void DeleteRoom(int id)
+    public void DeleteRoom(Guid id)
     {
         var room = dbContext.Rooms.FirstOrDefault(c => c.Id == id);
 
@@ -52,7 +53,7 @@ public class RoomService : IRoomService
         });
     }
 
-    public RoomDto UpdateRoom(PostRoomDto roomDto, int id)
+    public RoomDto UpdateRoom(PostRoomDto roomDto, Guid id)
     {
         var room = dbContext.Rooms.FirstOrDefault(c => c.Id == id);
 

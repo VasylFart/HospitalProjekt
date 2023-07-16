@@ -16,8 +16,6 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     // The DbSet property will tell EF Core tha we have a table that needs to be created
     public DbSet<Patient> Patients => Set<Patient>();
 
-    public DbSet<Center> Centers => Set<Center>();
-
     public DbSet<Address> Addresses  => Set<Address>();
 
     public DbSet<Comment> Comments => Set<Comment>();
@@ -25,8 +23,6 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Contact> Contacts => Set<Contact>();
 
     public DbSet<Doctor> Doctors => Set<Doctor>();
-
-    public DbSet<PatientRoom> PatientRooms => Set<PatientRoom>();
         
     public DbSet<Room> Rooms => Set<Room>();
 

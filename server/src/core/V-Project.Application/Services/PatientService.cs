@@ -26,11 +26,36 @@ public class PatientService : IPatientService
 
     public PatientDto AddNewPatient(PostPatientDto newPostPatient)
     {
-        var newPatient = new Patient()
+        var newPatient = new Patient
         {
             FullName = newPostPatient.FullName,
             DateOfBirth = newPostPatient.DateOfBirth,
             Pesel = newPostPatient.Pesel,
+
+            Address = new Address
+            {
+                Country = newPostPatient.Address.Country,
+                City = newPostPatient.Address.City,
+                Street = newPostPatient.Address.Street,
+                HomeNumber = newPostPatient.Address.HomeNumber
+            },
+
+            Contact = new Contact
+            {
+                MobilePhone = newPostPatient.Contact.MobilePhone,
+                Email = newPostPatient.Contact.Email
+            },
+
+            DoctorId = Guid.Parse(newPostPatient.DoctorId),
+
+            DepartmentId = Guid.Parse(newPostPatient.DepartmentId),
+
+            RoomId = Guid.Parse(newPostPatient.RoomId),
+
+            Comment = new Comment
+            {
+                Message = newPostPatient.Comment.Message
+            },
         };
 
         dbContext.Patients.Add(newPatient);
@@ -41,7 +66,7 @@ public class PatientService : IPatientService
             Id = newPatient.Id,
             FullName = newPatient.FullName,
             DateOfBirth = newPatient.DateOfBirth,
-            Pesel = newPatient.Pesel,
+            Pesel = newPatient.Pesel
         };
     }
 

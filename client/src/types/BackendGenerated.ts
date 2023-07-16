@@ -22,30 +22,25 @@ export interface PostPatientDto {
     fullName: string;
     dateOfBirth: Date;
     pesel: string;
+    address: PostAddressDto;
+    doctorId: string;
+    departmentId: string;
+    roomId: string;
+}
+
+export interface PostAddressDto {
+    country: string;
+    city: string;
+    street: string;
+    homeNumber: string;
 }
 
 export interface AddressDto {
     id: string;
     country: string;
-    city?: string | undefined;
+    city: string;
     street: string;
     homeNumber: string;
-}
-
-export interface PostAddressDto {
-    country: string;
-    city?: string | undefined;
-    street: string;
-    homeNumber: string;
-}
-
-export interface CenterDto {
-    id: number;
-    name: string;
-}
-
-export interface PostCenterDto {
-    name: string;
 }
 
 export interface CommentDto {
@@ -57,21 +52,26 @@ export interface CommentDto {
 
 export interface PostCommentDto {
     message: string;
+    createdDate: Date;
+    updatedDate?: Date | undefined;
+    patientId: string;
+    doctorId: string;
 }
 
 export interface ContactDto {
-    id: number;
-    mobilePhone?: string | undefined;
-    email?: string | undefined;
+    id: string;
+    mobilePhone: string;
+    email: string;
 }
 
 export interface PostContactDto {
     mobilePhone?: string | undefined;
     email?: string | undefined;
+    patientId: string;
 }
 
 export interface DepartmentDto {
-    id: number;
+    id: string;
     value: string;
 }
 
@@ -89,7 +89,7 @@ export interface PostDoctorDto {
 }
 
 export interface RoomDto {
-    id: number;
+    id: string;
     number: number;
 }
 

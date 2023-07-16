@@ -12,8 +12,8 @@ using V_Project.Infrastructure;
 namespace V_Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230712215957_Init3")]
-    partial class Init3
+    [Migration("20230715210217_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,7 @@ namespace V_Project.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
@@ -56,37 +57,11 @@ namespace V_Project.Infrastructure.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("V_Project.Domain.Center", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Centers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Szpital"
-                        });
-                });
-
             modelBuilder.Entity("V_Project.Domain.Comment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
@@ -111,23 +86,24 @@ namespace V_Project.Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.HasIndex("PatientId");
+                    b.HasIndex("PatientId")
+                        .IsUnique();
 
                     b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("V_Project.Domain.Contact", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MobilePhone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("PatientId")
@@ -143,13 +119,8 @@ namespace V_Project.Infrastructure.Migrations
 
             modelBuilder.Entity("V_Project.Domain.Department", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<Guid>("PatientId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
@@ -159,26 +130,6 @@ namespace V_Project.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Depatments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            PatientId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Value = "Yellow"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            PatientId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Value = "Orange"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            PatientId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Value = "Green"
-                        });
                 });
 
             modelBuilder.Entity("V_Project.Domain.Doctor", b =>
@@ -187,16 +138,11 @@ namespace V_Project.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CenterId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CenterId");
 
                     b.ToTable("Doctors");
                 });
@@ -207,14 +153,11 @@ namespace V_Project.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CenterId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("date");
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("uniqueidentifier");
@@ -223,53 +166,38 @@ namespace V_Project.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Pesel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Pesel")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("RoomId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CenterId");
 
                     b.HasIndex("DepartmentId");
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("Patients");
-                });
-
-            modelBuilder.Entity("V_Project.Domain.PatientRoom", b =>
-                {
-                    b.Property<Guid>("PatientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("PublicationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
-
-                    b.HasKey("PatientId", "RoomId");
-
                     b.HasIndex("RoomId");
 
-                    b.ToTable("PatientRooms");
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("V_Project.Domain.Room", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Rooms");
                 });
@@ -294,8 +222,8 @@ namespace V_Project.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("V_Project.Domain.Patient", "Patient")
-                        .WithMany("Comments")
-                        .HasForeignKey("PatientId")
+                        .WithOne("Comment")
+                        .HasForeignKey("V_Project.Domain.Comment", "PatientId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -315,25 +243,8 @@ namespace V_Project.Infrastructure.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("V_Project.Domain.Doctor", b =>
-                {
-                    b.HasOne("V_Project.Domain.Center", "Center")
-                        .WithMany("Doctors")
-                        .HasForeignKey("CenterId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Center");
-                });
-
             modelBuilder.Entity("V_Project.Domain.Patient", b =>
                 {
-                    b.HasOne("V_Project.Domain.Center", "Center")
-                        .WithMany("Patients")
-                        .HasForeignKey("CenterId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("V_Project.Domain.Department", "Department")
                         .WithMany("Patients")
                         .HasForeignKey("DepartmentId")
@@ -346,42 +257,35 @@ namespace V_Project.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Center");
-
-                    b.Navigation("Department");
-
-                    b.Navigation("Doctor");
-                });
-
-            modelBuilder.Entity("V_Project.Domain.PatientRoom", b =>
-                {
-                    b.HasOne("V_Project.Domain.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("V_Project.Domain.Room", "Room")
-                        .WithMany()
+                        .WithMany("Patients")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Patient");
+                    b.Navigation("Department");
+
+                    b.Navigation("Doctor");
 
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("V_Project.Domain.Center", b =>
+            modelBuilder.Entity("V_Project.Domain.Room", b =>
                 {
-                    b.Navigation("Doctors");
+                    b.HasOne("V_Project.Domain.Department", "Department")
+                        .WithMany("Rooms")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("Patients");
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("V_Project.Domain.Department", b =>
                 {
                     b.Navigation("Patients");
+
+                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("V_Project.Domain.Doctor", b =>
@@ -396,9 +300,16 @@ namespace V_Project.Infrastructure.Migrations
                     b.Navigation("Address")
                         .IsRequired();
 
-                    b.Navigation("Comments");
+                    b.Navigation("Comment")
+                        .IsRequired();
 
-                    b.Navigation("Contact");
+                    b.Navigation("Contact")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("V_Project.Domain.Room", b =>
+                {
+                    b.Navigation("Patients");
                 });
 #pragma warning restore 612, 618
         }

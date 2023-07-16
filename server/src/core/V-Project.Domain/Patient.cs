@@ -16,7 +16,7 @@ public class Patient
 
     public Department Department { get; set; }
 
-    public int DepartmentId { get; set; }
+    public Guid DepartmentId { get; set; }
 
     public Room Room { get; set; }
 
@@ -26,9 +26,5 @@ public class Patient
 
     public Guid DoctorId { get; set; }
 
-    public List<Comment> Comments { get; set; }
-
-    public Center Center { get; set; }
-
-    public int CenterId { get; set; }
+    public Comment Comment { get; set; }
 }

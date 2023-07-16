@@ -26,7 +26,8 @@ public sealed class DateOnlyConverter : JsonConverter<DateOnly>
         return date;
     }
 
-    public override void Write(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, DateOnly value, 
+        JsonSerializerOptions options)
     {
         writer.WriteStringValue(value.ToIsoString());
     }

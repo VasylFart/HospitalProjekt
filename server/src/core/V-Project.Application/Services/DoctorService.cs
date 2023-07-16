@@ -15,6 +15,7 @@ public class DoctorService : IDoctorService
         var newDoctor = new Doctor()
         {
             FullName = newPostDoctorDto.FullName,
+            DepartmetId = Guid.Parse(newPostDoctorDto.DoctorId)
         };
 
         dbContext.Doctors.Add(newDoctor);

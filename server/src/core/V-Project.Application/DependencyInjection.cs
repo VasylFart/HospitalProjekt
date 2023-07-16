@@ -9,8 +9,6 @@ public static class DependencyInjection
     {
         services.AddScoped<IPatientService, PatientService>();
 
-        services.AddScoped<ICenterService, CenterService>();
-
         services.AddScoped<IAddressService, AddressService>();
 
         services.AddScoped<ICommentService, CommentService>();

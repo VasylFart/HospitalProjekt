@@ -7,8 +7,6 @@ public interface IApplicationDbContext : IDisposable
 {
     DbSet<Patient> Patients { get; }
 
-    DbSet<Center> Centers { get; }
-
     DbSet<Address> Addresses { get; }
 
     DbSet<Comment> Comments { get; }
@@ -16,8 +14,6 @@ public interface IApplicationDbContext : IDisposable
     DbSet<Contact> Contacts { get; }
 
     DbSet<Doctor> Doctors { get; }
-
-    DbSet<PatientRoom> PatientRooms { get; }
 
     DbSet<Room> Rooms { get; }
 
