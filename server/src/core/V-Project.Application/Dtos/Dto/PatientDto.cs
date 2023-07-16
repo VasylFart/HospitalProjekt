@@ -1,4 +1,5 @@
-﻿namespace V_Project.Application;
+﻿
+namespace V_Project.Application;
 public class PatientDto
 {
     public Guid Id { get; set; }
@@ -11,3 +12,4 @@ public class PatientDto
 
     public string Pesel { get; set; }
 }
+    
