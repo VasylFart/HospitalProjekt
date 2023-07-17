@@ -333,4 +333,3 @@ ASALocalRun/
 
 # mac development
 .DS_Store
-/server/src/core/V-Project.Application/Dtos/PostPatientDto.cs
