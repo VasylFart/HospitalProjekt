@@ -12,40 +12,90 @@
 
 export interface PatientDto {
     id: string;
-    name: string;
-    age: number;
+    fullName: string;
     dateOfBirth: Date;
+    age: number;
     pesel: string;
-    city?: string | undefined;
-    contact?: string | undefined;
-    mobilePhone?: string | undefined;
 }
 
 export interface PostPatientDto {
-    name: string;
+    fullName: string;
     dateOfBirth: Date;
     pesel: string;
-    city?: string | undefined;
-    contact?: string | undefined;
-    mobilePhone?: string | undefined;
+    address: PostAddressDto;
+    contact: PostContactDto;
+    comment: PostCommentDto;
+    doctorId: string;
+    departmentId: string;
+    roomId: string;
 }
 
-export interface WeatherForecastDto {
-    date: Date;
-    temperatureC: number;
-    temperatureF: number;
-    summary?: string | undefined;
+export interface PostAddressDto {
+    country: string;
+    city: string;
+    street: string;
+    homeNumber: string;
 }
 
-export interface CenterDto {
+export interface PostContactDto {
+    mobilePhone: string;
+    email: string;
+}
+
+export interface PostCommentDto {
+    message: string;
+}
+
+export interface AddressDto {
     id: string;
-    name: string;
-    address: string;
+    country: string;
+    city: string;
+    street: string;
+    homeNumber: string;
 }
 
-export interface PostCenterDto {
-    name: string;
-    address: string;
+export interface CommentDto {
+    id: string;
+    message: string;
+    createdDate: Date;
+    updatedDate?: Date | undefined;
+}
+
+export interface ContactDto {
+    id: string;
+    mobilePhone: string;
+    email: string;
+}
+
+export interface DepartmentDto {
+    id: string;
+    value: string;
+}
+
+export interface PostDepartmentDto {
+    value: string;
+}
+
+export interface DoctorDto {
+    id: string;
+    fullName: string;
+}
+
+export interface PostDoctorDto {
+    fullName: string;
+    departmentId: string;
+}
+
+export interface RoomDto {
+    id: string;
+    number: number;
+    freeSlots: number;
+}
+
+export interface PostRoomDto {
+    number: number;
+    departmentId: string;
+    capacity: number;
 }
 
 export interface FileResponse {

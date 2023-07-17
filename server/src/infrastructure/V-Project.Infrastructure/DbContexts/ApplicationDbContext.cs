@@ -14,11 +14,19 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     }
 
     // The DbSet property will tell EF Core tha we have a table that needs to be created
-    public DbSet<WeatherForecast> WeatherForecasts => Set<WeatherForecast>();
-
     public DbSet<Patient> Patients => Set<Patient>();
 
-    public DbSet<Center> Centers => Set<Center>();
+    public DbSet<Address> Addresses  => Set<Address>();
+
+    public DbSet<Comment> Comments => Set<Comment>();
+
+    public DbSet<Contact> Contacts => Set<Contact>();
+
+    public DbSet<Doctor> Doctors => Set<Doctor>();
+        
+    public DbSet<Room> Rooms => Set<Room>();
+
+    public DbSet<Department> Depatments => Set<Department>();
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {

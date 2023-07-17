@@ -18,40 +18,69 @@ public class PatientService : IPatientService
         return result.Select(x => new PatientDto
         {
             Id = x.Id,
-            Name = x.Name,
+            FullName = x.FullName,
             DateOfBirth = x.DateOfBirth,
             Pesel = x.Pesel,
-            City = x.City,
-            Contact = x.Contact,
-            MobilePhone = x.MobilePhone
         });
     }
 
     public PatientDto AddNewPatient(PostPatientDto newPostPatient)
     {
-        var newPatient = new Patient()
-        {
-            Name = newPostPatient.Name,
-            DateOfBirth = newPostPatient.DateOfBirth,
-            Pesel = newPostPatient.Pesel,
-            City = newPostPatient.City,
-            Contact = newPostPatient.Contact,
-            MobilePhone = newPostPatient.MobilePhone
-        };
+        var room = dbContext.Rooms.FirstOrDefault(r => r.Id == Guid.Parse(newPostPatient.RoomId));
 
-        dbContext.Patients.Add(newPatient);
-        dbContext.SaveChangesAsync();
-
-        return new PatientDto
+        if (room != null && room.FreeSlots > 0)
         {
-            Id = newPatient.Id,
-            Name = newPatient.Name,
-            DateOfBirth = newPatient.DateOfBirth,
-            Pesel = newPatient.Pesel,
-            City = newPatient.City,
-            Contact = newPatient.Contact,
-            MobilePhone = newPatient.MobilePhone
-        };
+            var newPatient = new Patient
+            {
+                FullName = newPostPatient.FullName,
+                DateOfBirth = newPostPatient.DateOfBirth,
+                Pesel = newPostPatient.Pesel,
+
+                Address = new Address
+                {
+                    Country = newPostPatient.Address.Country,
+                    City = newPostPatient.Address.City,
+                    Street = newPostPatient.Address.Street,
+                    HomeNumber = newPostPatient.Address.HomeNumber
+                },
+
+                Contact = new Contact
+                {
+                    MobilePhone = newPostPatient.Contact.MobilePhone,
+                    Email = newPostPatient.Contact.Email
+                },
+
+                DoctorId = Guid.Parse(newPostPatient.DoctorId),
+
+                DepartmentId = Guid.Parse(newPostPatient.DepartmentId),
+
+                RoomId = Guid.Parse(newPostPatient.RoomId),
+
+                Comment = new Comment
+                {
+                    Message = newPostPatient.Comment.Message
+                },
+            };
+
+            room.OccupiedSlots++;
+
+            dbContext.Patients.Add(newPatient);
+            dbContext.SaveChangesAsync();
+
+            return new PatientDto
+            {
+                Id = newPatient.Id,
+                FullName = newPatient.FullName,
+                DateOfBirth = newPatient.DateOfBirth,
+                Pesel = newPatient.Pesel
+            };
+        }
+
+        else
+        {
+            throw new ClientException("Cannot add a patient. The room is full.");
+        }
+            
     }
 
     public PatientDto UpdatePatient(PostPatientDto postPatientDto, Guid id)
@@ -60,12 +89,9 @@ public class PatientService : IPatientService
 
         if (patient != null)
         {
-            patient.Name = postPatientDto.Name;
+            patient.FullName = postPatientDto.FullName;
             patient.DateOfBirth = postPatientDto.DateOfBirth;
             patient.Pesel = postPatientDto.Pesel;
-            patient.City = postPatientDto.City;
-            patient.Contact = postPatientDto.Contact;
-            patient.MobilePhone = postPatientDto.MobilePhone;
 
             dbContext.Patients.Update(patient);
             dbContext.SaveChangesAsync();
@@ -81,12 +107,9 @@ public class PatientService : IPatientService
         return new PatientDto
         {
             Id = updatedPatient.Id,
-            Name = updatedPatient.Name,
+            FullName = updatedPatient.FullName,
             DateOfBirth = updatedPatient.DateOfBirth,
             Pesel = updatedPatient.Pesel,
-            City = updatedPatient.City,
-            Contact = updatedPatient.Contact,
-            MobilePhone = updatedPatient.MobilePhone
         };
     }
 

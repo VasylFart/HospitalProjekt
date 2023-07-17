@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using V_Project.Infrastructure;
-using V_Project.Sql;
 
 namespace V_Project.Server;
 
@@ -48,6 +47,6 @@ public class Program
 
         if (context.Database.IsSqlServer()) context.Database.Migrate();
 
-        if (context.Database.IsInMemory()) DbContextSeed.Seed(services.GetRequiredService<ApplicationDbContext>());
+        //if (context.Database.IsInMemory()) DbContextSeed.Seed(services.GetRequiredService<ApplicationDbContext>());
     }
 }

@@ -54,12 +54,9 @@ public class PatientControllerTests : IClassFixture<WebApplicationFactory<Startu
     {
         var model = new PostPatientDto()
         {
-            Name = "Gregorz",
+            FullName = "Gregorz",
             DateOfBirth = new DateOnly(1995, 3, 15),
             Pesel = "12345678910",
-            City = "Olsztyn",
-            Contact = "Zosia",
-            MobilePhone = "111-222-333"
         };
 
         //var httpContent = model.ToJsonHttpContent();
