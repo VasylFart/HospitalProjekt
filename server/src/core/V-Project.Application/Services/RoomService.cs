@@ -51,7 +51,8 @@ public class RoomService : IRoomService
         return result.Select(c => new RoomDto
         {
             Id = c.Id,
-            Number = c.Number
+            Number = c.Number,
+            FreeSlots = c.FreeSlots
         });
     }
 
